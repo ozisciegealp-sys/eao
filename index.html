@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EAÖ — Operasyon ve otomasyon kayıtları</title>
+<meta name="description" content="Çok şubeli perakende ve F&B operasyonunda elle yapılan işleri otomatikleştiren araçların kaydı.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1F2ED;
+    --ink:#16201C;
+    --ink-soft:#55605A;
+    --rule:#CDD1C8;
+    --accent:#1F5D4C;
+    --accent-soft:#E2EAE4;
+    --gutter:8.5rem;
+    --measure:38rem;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:17px;
+    line-height:1.55;
+    font-feature-settings:"tnum" 1;
+    padding:0 1.5rem 6rem;
+  }
+  .wrap{max-width:calc(var(--gutter) + var(--measure));margin:0 auto}
+
+  /* row = margin column + content column */
+  .row{display:grid;grid-template-columns:var(--gutter) minmax(0,1fr);gap:0 2rem}
+  .row > .meta{
+    font-size:.8125rem;
+    line-height:1.5;
+    color:var(--ink-soft);
+    padding-top:.3rem;
+  }
+  .meta span{display:block}
+
+  /* masthead */
+  header{padding:3.5rem 0 0}
+  .mark{
+    font-weight:700;
+    font-size:1.5rem;
+    letter-spacing:.14em;
+    line-height:1;
+  }
+  .mark em{font-style:normal;color:var(--accent)}
+  .who{
+    margin-top:.6rem;
+    color:var(--ink-soft);
+    font-size:.9375rem;
+    max-width:30rem;
+  }
+
+  /* hero */
+  .hero{padding:4.5rem 0 4rem}
+  h1{
+    font-size:clamp(1.9rem,5vw,2.9rem);
+    line-height:1.12;
+    letter-spacing:-.022em;
+    font-weight:600;
+    max-width:19ch;
+  }
+  .hero p{margin-top:1.4rem;max-width:34rem;color:var(--ink-soft)}
+
+  .shift{
+    margin-top:2.6rem;
+    border-top:2px solid var(--ink);
+    border-bottom:1px solid var(--rule);
+    padding:1.1rem 0 1.3rem;
+    max-width:34rem;
+  }
+  .shift-label{font-size:.8125rem;color:var(--ink-soft);margin-bottom:.7rem}
+  .shift-line{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .figure{
+    font-size:clamp(1.6rem,4.5vw,2.1rem);
+    font-weight:700;
+    letter-spacing:-.02em;
+    line-height:1;
+  }
+  .figure.was{color:var(--ink-soft);text-decoration:line-through;text-decoration-thickness:2px}
+  .figure.now{color:var(--accent)}
+  .figure-unit{font-size:.9375rem;font-weight:500;letter-spacing:0}
+  .arrow{color:var(--ink-soft);font-size:1.1rem}
+
+  /* sections */
+  section{padding-top:3.75rem}
+  h2{
+    font-size:1.0625rem;
+    font-weight:700;
+    letter-spacing:-.005em;
+    padding-bottom:.55rem;
+    border-bottom:2px solid var(--ink);
+  }
+  .lede{margin-top:1.1rem;color:var(--ink-soft);max-width:34rem}
+
+  /* records */
+  .record{
+    border-bottom:1px solid var(--rule);
+    padding:1.75rem 0;
+  }
+  .record h3{
+    font-size:1.1875rem;
+    font-weight:600;
+    letter-spacing:-.012em;
+    line-height:1.3;
+  }
+  .record p{margin-top:.6rem;max-width:34rem}
+  .record .was-line{margin-top:.75rem;color:var(--ink-soft);font-size:.9375rem}
+  .stack{
+    margin-top:.9rem;
+    font-size:.8125rem;
+    color:var(--ink-soft);
+  }
+  .status{
+    display:inline-block;
+    font-size:.75rem;
+    font-weight:600;
+    padding:.18rem .5rem;
+    border-radius:2px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    margin-bottom:.7rem;
+  }
+  .status.wip{background:transparent;color:var(--ink-soft);border:1px solid var(--rule)}
+  a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
+  a:hover{text-decoration-thickness:2px}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  .repo{display:inline-block;margin-top:.9rem;font-size:.9375rem;font-weight:500}
+
+  /* skills */
+  .group{border-bottom:1px solid var(--rule);padding:1.1rem 0}
+  .group h3{font-size:.9375rem;font-weight:600;margin-bottom:.3rem}
+  .group p{color:var(--ink-soft);font-size:.9375rem;max-width:34rem}
+
+  /* contact */
+  .contact p{max-width:34rem;margin-top:1.1rem}
+  .contact .lines{margin-top:1.4rem;font-weight:500}
+  .contact .lines a{display:inline-block;margin-right:1.5rem;margin-bottom:.4rem}
+
+  footer{padding-top:3.5rem;color:var(--ink-soft);font-size:.8125rem}
+
+  /* one page-load reveal, hero only */
+  @media (prefers-reduced-motion:no-preference){
+    .shift{animation:rise .5s cubic-bezier(.2,.7,.3,1) .15s both}
+    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  }
+
+  @media (max-width:720px){
+    :root{--gutter:0px}
+    .row{grid-template-columns:1fr;gap:0}
+    .row > .meta{padding-top:0;margin-bottom:.5rem}
+    .meta span{display:inline;margin-right:.9rem}
+    body{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="row">
+    <div class="meta"><span>İzmir</span></div>
+    <div>
+      <div class="mark">EA<em>Ö</em></div>
+      <p class="who">Çok şubeli perakende ve F&amp;B operasyonunda dokuz yıl. Elle yapılan işleri araca çeviriyorum. Bu sayfa, o araçların kaydı.</p>
+    </div>
+  </header>
+
+  <div class="hero row">
+    <div class="meta"><span>Kayıt</span><span>2026</span></div>
+    <div>
+      <h1>Bir mağazada tekrar eden her iş, bir kez yazılabilir.</h1>
+      <p>Bölge raporunu her akşam elle hazırlamak yerine, veriyi kaynağından çekip gün sonu fire ve satış adetlerini ertesi güne hazır bırakan bir sistem kurdum. Aynı mantığı çizelgeye, stoğa ve bordroya taşıdım.</p>
+
+      <div class="shift">
+        <div class="shift-label">Bölge raporu — bir günlük hazırlık süresi</div>
+        <div class="shift-line">
+          <span class="figure was">45<span class="figure-unit"> dk</span></span>
+          <span class="arrow">→</span>
+          <span class="figure now">0<span class="figure-unit"> dk</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="row">
+    <div class="meta"><span>Kayıtlar</span></div>
+    <div>
+      <h2>Yapılmış işler</h2>
+      <p class="lede">Her kayıtta aynı üç bilgi var: önce nasıl yapılıyordu, araç ne yapıyor, hangi durumda.</p>
+
+      <article class="record">
+        <span class="status">Yayında</span>
+        <h3>Bölge raporlama otomasyonu</h3>
+        <p>Oracle'dan günlük veriyi çekiyor, bilgisayara kaydediyor, rapor formunu kayıtlı veriden otomatik dolduruyor ve gün sonu fire ile satış adetlerini ertesi güne hazır hâle getiriyor. Girişten dosyanın formüle bağlanmasına kadar elle müdahale yok.</p>
+        <p class="was-line">Öncesi: her akşam manuel veri indirme, kopyalama ve formüle bağlama.</p>
+        <div class="stack">Oracle · Excel · VBA</div>
+        <a class="repo" href="#">Kodu gör →</a>
+      </article>
+
+      <article class="record">
+        <span class="status">Yayında</span>
+        <h3>Vardiya çizelgesi ve stok takibi</h3>
+        <p>Mağaza operasyonunda çizelge kurgusu, stok sayımı ve haftalık raporlamayı tek dosyada birleştiren Excel/VBA sistemleri. Beş farklı lokasyonda kullanıldı.</p>
+        <p class="was-line">Öncesi: her şube kendi tablosunu tutuyordu, birleştirme elle yapılıyordu.</p>
+        <div class="stack">Excel · VBA</div>
+        <a class="repo" href="#">Kodu gör →</a>
+      </article>
+
+      <article class="record">
+        <span class="status">Yayında</span>
+        <h3>Gmail'den takvime aktarım</h3>
+        <p>Gelen e-postadaki tarih ve saat bilgisini okuyup Google Takvim'e etkinlik olarak yazan Apps Script entegrasyonu.</p>
+        <p class="was-line">Öncesi: her randevu elle takvime giriliyordu.</p>
+        <div class="stack">Google Apps Script</div>
+        <a class="repo" href="#">Kodu gör →</a>
+      </article>
+
+      <article class="record">
+        <span class="status wip">Geliştiriliyor</span>
+        <h3>İlan radarı</h3>
+        <p>Belirlenen kriterlere uyan iş ilanlarını düzenli tarayıp tek listede toplayan otomasyon akışı.</p>
+        <p class="was-line">Öncesi: dört ayrı siteyi her gün elle kontrol etmek.</p>
+        <div class="stack">n8n · Docker</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="meta"><span>Araçlar</span></div>
+    <div>
+      <h2>Ne ile çalışıyorum</h2>
+      <div class="group">
+        <h3>Veri ve raporlama</h3>
+        <p>Excel, VBA, Power Query. Python tarafında pandas ve openpyxl üzerine çalışıyorum.</p>
+      </div>
+      <div class="group">
+        <h3>Otomasyon</h3>
+        <p>Google Apps Script, n8n, Docker. Yerel model kurulumu ve komut satırı araçları.</p>
+      </div>
+      <div class="group">
+        <h3>Operasyon</h3>
+        <p>Çok şubeli P&amp;L okuma, fire ve zayi takibi, bordro, çizelge kurgusu, sayım farkı analizi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row contact">
+    <div class="meta"><span>İletişim</span></div>
+    <div>
+      <h2>Bir süreci konuşalım</h2>
+      <p>Ekibinizde her hafta tekrar eden ve hâlâ elle yapılan bir iş varsa, nasıl yapıldığını anlatın. Otomatikleşip otomatikleşmeyeceğini söylerim.</p>
+      <div class="lines">
+        <a href="mailto:ozisciegealp@gmail.com">ozisciegealp@gmail.com</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="row">
+    <div class="meta"></div>
+    <div>İzmir · Son güncelleme Eylül 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
