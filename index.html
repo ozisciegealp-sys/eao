@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EAÖ — Operasyon ve otomasyon kayıtları</title>
-<meta name="description" content="Çok şubeli perakende ve F&B operasyonunda elle yapılan işleri otomatikleştiren araçların kaydı.">
+<meta name="description" content="Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -168,7 +168,7 @@
     <div class="meta"><span>İzmir</span></div>
     <div>
       <div class="mark">EA<em>Ö</em></div>
-      <p class="who">Çok şubeli perakende ve F&amp;B operasyonunda dokuz yıl. Elle yapılan işleri araca çeviriyorum. Bu sayfa, o araçların kaydı.</p>
+      <p class="who">Perakende operasyonlarında yaklaşık beş yıl yöneticilik. 16 mağazalık bölgede raporlama, denetim ve eğitim projeleri yürüttüm. Bu sayfa, o projelerin kaydı.</p>
     </div>
   </header>
 
@@ -176,61 +176,73 @@
     <div class="meta"><span>Kayıt</span><span>2026</span></div>
     <div>
       <h1>Bir mağazada tekrar eden her iş, bir kez yazılabilir.</h1>
-      <p>Bölge raporunu her akşam elle hazırlamak yerine, veriyi kaynağından çekip gün sonu fire ve satış adetlerini ertesi güne hazır bırakan bir sistem kurdum. Aynı mantığı çizelgeye, stoğa ve bordroya taşıdım.</p>
+      <p>Günlük bölge raporunu VBA ile otomatikleştirdim; Excel ve Oracle üzerinde çalışan sistem, her gün yaklaşık bir saat süren elle hazırlığı yaklaşık bir dakikaya indirdi. Yıllık karşılığı yaklaşık 250 saat.</p>
 
       <div class="shift">
-        <div class="shift-label">Bölge raporu — bir günlük hazırlık süresi</div>
+        <div class="shift-label">Bölge raporu — günlük hazırlık süresi (yaklaşık)</div>
         <div class="shift-line">
           <span class="figure was">60<span class="figure-unit"> dk</span></span>
           <span class="arrow">→</span>
-          <span class="figure now">0<span class="figure-unit"> dk</span></span>
+          <span class="figure now">1<span class="figure-unit"> dk</span></span>
         </div>
       </div>
     </div>
   </div>
 
   <section class="row">
-    <div class="meta"><span>Kayıtlar</span></div>
+    <div class="meta"><span>Projeler</span></div>
     <div>
-      <h2>Yapılmış işler</h2>
-      <p class="lede">Her kayıtta aynı üç bilgi var: önce nasıl yapılıyordu, araç ne yapıyor, hangi durumda.</p>
+      <h2>Projeler ve sorumluluklar</h2>
+      <p class="lede">Her kayıtta dönem, kapsam ve yapılan iş var. Kodu veya dosyası paylaşılabilen projelerde, sahte veriyle hazırlanmış sürümün bağlantısı yer alıyor.</p>
 
       <article class="record">
-        <span class="status">Yayında</span>
+        <span class="status">2022–2026</span>
         <h3>Bölge raporlama otomasyonu</h3>
-        <p>Oracle'dan günlük veriyi çekiyor, bilgisayara kaydediyor, rapor formunu kayıtlı veriden otomatik dolduruyor ve gün sonu fire ile satış adetlerini ertesi güne hazır hâle getiriyor. Girişten dosyanın formüle bağlanmasına kadar elle müdahale yok.</p>
-        <p class="was-line">Öncesi: her akşam manuel veri indirme, kopyalama ve formüle bağlama.</p>
-        <div class="stack">Oracle · Excel · VBA</div>
+        <p>Günlük bölge raporunu VBA mimarisiyle otomatikleştirdim; sistem Excel ve Oracle üzerinde çalışıyor. Müdür yardımcısıyken kurdum, sonra ek günlük operasyonel görevleri de kapsama aldım.</p>
+        <p class="was-line">Öncesi: günlük yaklaşık 1 saatlik elle hazırlık. Sonrası: yaklaşık 1 dakika, yılda yaklaşık 250 saat.</p>
+        <div class="stack">Kapsam: 16 mağaza · Starbucks · Excel · VBA · Oracle</div>
       </article>
-
       <article class="record">
-        <span class="status">Yayında</span>
-        <h3>Vardiya çizelgesi ve stok takibi</h3>
-        <p>Mağaza operasyonunda çizelge kurgusu, stok sayımı ve haftalık raporlamayı tek dosyada birleştiren Excel/VBA sistemleri. Beş farklı lokasyonda kullanıldı.</p>
-        <p class="was-line">Öncesi: her şube kendi tablosunu tutuyordu, birleştirme elle yapılıyordu.</p>
-        <div class="stack">Excel · VBA</div>
+        <span class="status">2023–2026</span>
+        <h3>Kapasite planlama ve otomatik par level modeli</h3>
+        <p>Öngörülen iş hacmini gerekli mağaza kapasitesine ve depolama ihtiyacına dönüştüren bir hesaplama modeli; yeni mağaza planlamasına girdi sağladı. Aynı modelin üzerine, mağazaların son bir aylık satış verisinden ürün bazında sipariş miktarını otomatik hesaplayan par level yapısını kurdum. 16 mağazada uygulandıktan sonra bölge müdürü aracılığıyla 6 bölgeye yaygınlaştırıldı.</p>
+        <p class="was-line">Öncesi: her mağazanın siparişi kalem kalem elle hesaplanıyordu.</p>
+        <div class="stack">Kapsam: 16 mağaza, 6 bölgeye yaygınlaştırıldı · Starbucks · Excel</div>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model">Sahte veriyle çalışan sürüm ve açıklama — GitHub</a>
       </article>
-    </div>
-  </section>
+      <article class="record">
+        <span class="status">2025–2026</span>
+        <h3>Bölge KPI kontrol platformu</h3>
+        <p>Kârlılık, satış, müşteri şikâyetleri, CRM kullanım oranı ve mağaza bazlı iç hesaplamaların tek yapı üzerinden izlendiği online Excel platformu. Aylık kontrollerini yürüttüm ve sapmaların mağaza bazında aksiyona bağlanmasını sağladım.</p>
+        <div class="stack">Kapsam: 16 mağaza · Starbucks · Excel</div>
+      </article>
+      <article class="record">
+        <span class="status">2025–2026</span>
+        <h3>İç denetim standardizasyonu ve denetim verisinden bölge eğitim programı</h3>
+        <p>Ön denetim akışını ve düzeltici-önleyici faaliyet takibini mağazalar arasında tek ortak yapıya bağladım; mağaza müdürlerinin karşılıklı iç denetim ve destek rotasyonlarını planlayıp yönettim. Gıda güvenliği denetim sonuçlarını tek veri setinde toplayıp en sık tekrar eden uygunsuzlukları önceliklendirdim, bulguları eğitim içeriğine dönüştürüp bölge müdürüne sundum ve bölge çapında bir eğitim sisteminin kurulmasına öncülük ettim.</p>
+        <div class="stack">Kapsam: 16 mağaza · Starbucks</div>
+      </article>
+      <article class="record">
+        <span class="status">2024–2026</span>
+        <h3>Yıllık izin takip sistemi</h3>
+        <p>Operasyona bağlı 6 bölgedeki tüm personelin yaklaşan yıllık izin haklarını izleyen Excel tabanlı takip sistemini kurdum ve işler hâle getirdim.</p>
+        <div class="stack">Kapsam: 6 bölge · Starbucks · Excel</div>
+      </article>
+\1
 
   <section class="row">
-    <div class="meta"><span>Araçlar</span></div>
+    <div class="meta"><span>Beceriler</span></div>
     <div>
-      <h2>Ne ile çalışıyorum</h2>
+      <h2>Beceriler</h2>
       <div class="group">
-        <h3>Veri ve raporlama</h3>
-        <p>Excel, VBA, Power Query. Python tarafında pandas ve openpyxl üzerine çalışıyorum.</p>
+        <h3>Sistemler ve araçlar</h3>
+        <p>Excel (VBA, dashboard) · Oracle (satış, envanter ve personel raporlama) · SAP · Orion POS · ÖKC ve kiosk entegrasyonları · B2B portal · CRM · Üretken yapay zekâ ile raporlama ve analiz</p>
       </div>
       <div class="group">
-        <h3>Otomasyon</h3>
-        <p>n8n, Docker. Yerel model kurulumu ve komut satırı araçları.</p>
+        <h3>Uzmanlık alanları</h3>
+        <p>Çok şubeli perakende operasyonları · Bölge raporlama ve KPI analizi · Raporlama otomasyonu ve süreç iyileştirme · P&amp;L ve maliyet kontrolü · İç denetim ve DÖF takibi · Yeni mağaza açılışı ve franchise kurulumu · Kapasite ve depolama planlaması · Stok ve tedarikçi yönetimi · Vardiya ve iş gücü planlaması · Ekip gelişimi ve performans yönetimi · Gıda güvenliği ve uyum</p>
       </div>
-      <div class="group">
-        <h3>Operasyon</h3>
-        <p>Çok şubeli P&amp;L okuma, fire ve zayi takibi, bordro, çizelge kurgusu, sayım farkı analizi.</p>
-      </div>
-    </div>
-  </section>
+\1
 
   <section class="row contact">
     <div class="meta"><span>İletişim</span></div>
@@ -238,7 +250,7 @@
       <h2>Bir süreci konuşalım</h2>
       <p>Ekibinizde her hafta tekrar eden ve hâlâ elle yapılan bir iş varsa, nasıl yapıldığını anlatın. Otomatikleşip otomatikleşmeyeceğini söylerim.</p>
       <div class="lines">
-        <a href="mailto:ozisciegealp@gmail.com">ozisciegealp@gmail.com</a>
+        <a href="mailto:ozisciegealp@icloud.com">ozisciegealp@icloud.com</a>
         <a href="https://www.linkedin.com/in/ege-alp-ozisci/">LinkedIn</a>
         <a href="https://github.com/ozisciegealp-sys">GitHub</a>
       </div>
