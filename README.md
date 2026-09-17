@@ -18,7 +18,7 @@ Bağlı depolardaki dosyalar, şirket verisi içeren orijinallerin sahte veriyle
 
 ## Bu depo
 
-Tek sayfalık statik site. `index.html` dışında dosya yok; harici bağımlılık olarak yalnızca Google Fonts kullanılıyor. GitHub Pages ile yayınlanıyor.
+Sitenin tamamı tek bir `index.html` dosyasıdır: HTML ve CSS aynı dosyada, harici bağımlılık olarak yalnızca Google Fonts kullanılıyor. GitHub Pages ile yayınlanıyor.
 
 ## İletişim
 
