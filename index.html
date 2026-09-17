@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EAÖ — Operasyon ve otomasyon kayıtları</title>
+<title>Ege Alp Özişci — Operasyon ve otomasyon kayıtları</title>
 <meta name="description" content="Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,11 +43,11 @@
   .meta span{display:block}
 
   /* masthead */
-  header{padding:3.5rem 0 0}
+  header{padding:3.5rem 0 0;position:relative}
   .mark{
     font-weight:700;
     font-size:1.5rem;
-    letter-spacing:.14em;
+    letter-spacing:-.01em;
     line-height:1;
   }
   .mark em{font-style:normal;color:var(--accent)}
@@ -129,6 +129,22 @@
     margin-bottom:.7rem;
   }
   .status.wip{background:transparent;color:var(--ink-soft);border:1px solid var(--rule)}
+  .langbtn{
+    position:absolute;
+    top:3.5rem;
+    right:0;
+    font:inherit;
+    font-size:.8125rem;
+    color:var(--accent);
+    background:none;
+    border:1px solid var(--rule);
+    border-radius:2px;
+    padding:.1rem .45rem;
+    cursor:pointer;
+    line-height:1.4;
+  }
+  .langbtn:hover{border-color:var(--accent)}
+  .langbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
   a:hover{text-decoration-thickness:2px}
   a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
@@ -165,81 +181,82 @@
 <div class="wrap">
 
   <header class="row">
+    <button id="lang" type="button" class="langbtn">English</button>
     <div class="meta"><span>İzmir</span></div>
     <div>
-      <div class="mark">EA<em>Ö</em></div>
-      <p class="who">Perakende operasyonlarında yaklaşık beş yıl yöneticilik. 16 mağazalık bölgede raporlama, denetim ve eğitim projeleri yürüttüm. Bu sayfa, o projelerin kaydı.</p>
+      <div class="mark">Ege Alp <em>Özişci</em></div>
+      <p class="who" data-en="About five years in retail management. I ran reporting, audit and training projects across a 16-store area. This page is the record of that work.">Perakende operasyonlarında yaklaşık beş yıl yöneticilik. 16 mağazalık bölgede raporlama, denetim ve eğitim projeleri yürüttüm. Bu sayfa, o projelerin kaydı.</p>
     </div>
   </header>
 
   <div class="hero row">
-    <div class="meta"><span>Kayıt</span><span>2026</span></div>
+    <div class="meta"><span data-en="Record">Kayıt</span><span>2026</span></div>
     <div>
-      <h1>Günlük bölge raporunu bir saatten bir dakikaya indirdim.</h1>
-      <p>16 mağazalık bölgede, Excel ve Oracle üzerinde VBA ile çalışan bir sistemle. Yıllık karşılığı yaklaşık 250 saatlik elle iş.</p>
+      <h1 data-en="I cut the daily area report from an hour to a minute.">Günlük bölge raporunu bir saatten bir dakikaya indirdim.</h1>
+      <p data-en="With a VBA system running on Excel and Oracle across a 16-store area. About 250 hours of manual work removed per year.">16 mağazalık bölgede, Excel ve Oracle üzerinde VBA ile çalışan bir sistemle. Yıllık karşılığı yaklaşık 250 saatlik elle iş.</p>
 
       <div class="shift">
-        <div class="shift-label">Bölge raporu — günlük hazırlık süresi (yaklaşık)</div>
+        <div class="shift-label" data-en="Area report — daily preparation time (approx.)">Bölge raporu — günlük hazırlık süresi (yaklaşık)</div>
         <div class="shift-line">
-          <span class="figure was">60<span class="figure-unit"> dk</span></span>
+          <span class="figure was">60<span class="figure-unit" data-en=" min"> dk</span></span>
           <span class="arrow">→</span>
-          <span class="figure now">1<span class="figure-unit"> dk</span></span>
+          <span class="figure now">1<span class="figure-unit" data-en=" min"> dk</span></span>
         </div>
       </div>
     </div>
   </div>
 
   <section class="row">
-    <div class="meta"><span>Projeler</span></div>
+    <div class="meta"><span data-en="Projects">Projeler</span></div>
     <div>
-      <h2>Projeler ve sorumluluklar</h2>
-      <p class="lede">Her kayıtta dönem, kapsam ve yapılan iş var. Kodu veya dosyası paylaşılabilen projelerde, sahte veriyle hazırlanmış sürümün bağlantısı yer alıyor.</p>
+      <h2 data-en="Projects and responsibilities">Projeler ve sorumluluklar</h2>
+      <p class="lede" data-en="Each entry gives the period, the scope and the work. Where a file could be shared, it links to a version rebuilt with synthetic data.">Her kayıtta dönem, kapsam ve yapılan iş var. Kodu veya dosyası paylaşılabilen projelerde, sahte veriyle hazırlanmış sürümün bağlantısı yer alıyor.</p>
 
       <article class="record">
         <span class="status">2022–2026</span>
-        <h3>Bölge raporlama otomasyonu</h3>
-        <p>Günlük bölge raporunu VBA mimarisiyle otomatikleştirdim; sistem Excel ve Oracle üzerinde çalışıyor. Müdür yardımcısıyken kurdum, sonra ek günlük operasyonel görevleri de kapsama aldım.</p>
-        <p class="was-line">Öncesi: günlük yaklaşık 1 saatlik elle hazırlık. Sonrası: yaklaşık 1 dakika, yılda yaklaşık 250 saat.</p>
-        <div class="stack">Kapsam: 16 mağaza · Starbucks · Excel · VBA · Oracle</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/store-markout-form">Bölge raporunun mağaza ayağı: gün sonu (mark-out) formu, sahte veriyle — GitHub</a>
+        <h3 data-en="Area reporting automation">Bölge raporlama otomasyonu</h3>
+        <p data-en="Automated the daily area report with a VBA architecture running on Excel and Oracle. I built it as an assistant manager and later brought further daily operational tasks into its scope.">Günlük bölge raporunu VBA mimarisiyle otomatikleştirdim; sistem Excel ve Oracle üzerinde çalışıyor. Müdür yardımcısıyken kurdum, sonra ek günlük operasyonel görevleri de kapsama aldım.</p>
+        <p class="was-line" data-en="Before: about 1 hour of manual preparation per day. After: about 1 minute, roughly 250 hours a year.">Öncesi: günlük yaklaşık 1 saatlik elle hazırlık. Sonrası: yaklaşık 1 dakika, yılda yaklaşık 250 saat.</p>
+        <div class="stack" data-en="Scope: 16 stores · Starbucks · Excel · VBA · Oracle">Kapsam: 16 mağaza · Starbucks · Excel · VBA · Oracle</div>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-markout-form" data-en="The store-level part of the report: end-of-day mark-out form, with synthetic data — GitHub">Bölge raporunun mağaza ayağı: gün sonu (mark-out) formu, sahte veriyle — GitHub</a>
       </article>
       <article class="record">
         <span class="status">2023–2026</span>
-        <h3>Kapasite planlama ve otomatik par level modeli</h3>
-        <p>Öngörülen iş hacmini gerekli mağaza kapasitesine ve depolama ihtiyacına dönüştüren bir hesaplama modeli; yeni mağaza planlamasına girdi sağladı. Aynı modelin üzerine, mağazaların son bir aylık satış verisinden ürün bazında sipariş miktarını otomatik hesaplayan par level yapısını kurdum. 16 mağazada uygulandıktan sonra bölge müdürü aracılığıyla 6 bölgeye yaygınlaştırıldı.</p>
-        <p class="was-line">Öncesi: her mağazanın siparişi kalem kalem elle hesaplanıyordu.</p>
-        <div class="stack">Kapsam: 16 mağaza, 6 bölgeye yaygınlaştırıldı · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model">Sahte veriyle çalışan sürüm ve açıklama — GitHub</a>
+        <h3 data-en="Capacity planning and automated par level model">Kapasite planlama ve otomatik par level modeli</h3>
+        <p data-en="A model that converts forecast business volume into required store capacity and storage space, feeding into new store planning. On top of it I built a par level structure that calculates order quantities per item from the last month of store sales. Used in 16 stores, then rolled out to 6 areas through the area manager.">Öngörülen iş hacmini gerekli mağaza kapasitesine ve depolama ihtiyacına dönüştüren bir hesaplama modeli; yeni mağaza planlamasına girdi sağladı. Aynı modelin üzerine, mağazaların son bir aylık satış verisinden ürün bazında sipariş miktarını otomatik hesaplayan par level yapısını kurdum. 16 mağazada uygulandıktan sonra bölge müdürü aracılığıyla 6 bölgeye yaygınlaştırıldı.</p>
+        <p class="was-line" data-en="Before: every store calculated its order item by item, by hand.">Öncesi: her mağazanın siparişi kalem kalem elle hesaplanıyordu.</p>
+        <div class="stack" data-en="Scope: 16 stores, rolled out to 6 areas · Starbucks · Excel">Kapsam: 16 mağaza, 6 bölgeye yaygınlaştırıldı · Starbucks · Excel</div>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model" data-en="Working version with synthetic data and documentation — GitHub">Sahte veriyle çalışan sürüm ve açıklama — GitHub</a>
       </article>
       <article class="record">
         <span class="status">2025–2026</span>
-        <h3>Bölge KPI kontrol platformu</h3>
-        <p>Kârlılık, satış, müşteri şikâyetleri, CRM kullanım oranı ve mağaza bazlı iç hesaplamaların tek yapı üzerinden izlendiği online Excel platformu. Aylık kontrollerini yürüttüm ve sapmaların mağaza bazında aksiyona bağlanmasını sağladım.</p>
-        <div class="stack">Kapsam: 16 mağaza · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/regional-kpi-dashboard">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
+        <h3 data-en="Area KPI control platform">Bölge KPI kontrol platformu</h3>
+        <p data-en="An online Excel platform where profitability, sales, customer complaints, CRM usage and store-level internal calculations are tracked in one structure. I ran the monthly reviews and made sure deviations turned into store-level actions.">Kârlılık, satış, müşteri şikâyetleri, CRM kullanım oranı ve mağaza bazlı iç hesaplamaların tek yapı üzerinden izlendiği online Excel platformu. Aylık kontrollerini yürüttüm ve sapmaların mağaza bazında aksiyona bağlanmasını sağladım.</p>
+        <div class="stack" data-en="Scope: 16 stores · Starbucks · Excel">Kapsam: 16 mağaza · Starbucks · Excel</div>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/regional-kpi-dashboard" data-en="Version rebuilt with synthetic data and documentation — GitHub">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
       </article>
       <article class="record">
         <span class="status">2025–2026</span>
-        <h3>İç denetim standardizasyonu ve denetim verisinden bölge eğitim programı</h3>
-        <p>Ön denetim akışını ve düzeltici-önleyici faaliyet takibini mağazalar arasında tek ortak yapıya bağladım; mağaza müdürlerinin karşılıklı iç denetim ve destek rotasyonlarını planlayıp yönettim. Gıda güvenliği denetim sonuçlarını tek veri setinde toplayıp en sık tekrar eden uygunsuzlukları önceliklendirdim, bulguları eğitim içeriğine dönüştürüp bölge müdürüne sundum ve bölge çapında bir eğitim sisteminin kurulmasına öncülük ettim.</p>
-        <div class="stack">Kapsam: 16 mağaza · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/internal-audit-tracker">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
+        <h3 data-en="Internal audit standardisation and audit-driven area training programme">İç denetim standardizasyonu ve denetim verisinden bölge eğitim programı</h3>
+        <p data-en="Brought the pre-audit process and corrective and preventive action tracking into one shared structure across stores, and planned the rotation in which store managers audit and support each other. Collected food safety audit results in a single data set, ranked the most frequent non-conformities, turned the findings into training content and presented it to the area manager, leading to an area-wide training programme.">Ön denetim akışını ve düzeltici-önleyici faaliyet takibini mağazalar arasında tek ortak yapıya bağladım; mağaza müdürlerinin karşılıklı iç denetim ve destek rotasyonlarını planlayıp yönettim. Gıda güvenliği denetim sonuçlarını tek veri setinde toplayıp en sık tekrar eden uygunsuzlukları önceliklendirdim, bulguları eğitim içeriğine dönüştürüp bölge müdürüne sundum ve bölge çapında bir eğitim sisteminin kurulmasına öncülük ettim.</p>
+        <div class="stack" data-en="Scope: 16 stores · Starbucks · Excel">Kapsam: 16 mağaza · Starbucks · Excel</div>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/internal-audit-tracker" data-en="Version rebuilt with synthetic data and documentation — GitHub">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
       </article>
       <article class="record">
         <span class="status">2024–2026</span>
-        <h3>Yıllık izin takip sistemi</h3>
-        <p>Operasyona bağlı 6 bölgedeki tüm personelin yaklaşan yıllık izin haklarını izleyen Excel tabanlı takip sistemini kurdum ve işler hâle getirdim.</p>
-        <div class="stack">Kapsam: 6 bölge · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/annual-leave-tracker">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
+        <h3 data-en="Annual leave tracking system">Yıllık izin takip sistemi</h3>
+        <p data-en="Built and ran an Excel-based system that tracks upcoming annual leave entitlements for all staff across the 6 areas in the operation.">Operasyona bağlı 6 bölgedeki tüm personelin yaklaşan yıllık izin haklarını izleyen Excel tabanlı takip sistemini kurdum ve işler hâle getirdim.</p>
+        <div class="stack" data-en="Scope: 6 areas · Starbucks · Excel">Kapsam: 6 bölge · Starbucks · Excel</div>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/annual-leave-tracker" data-en="Version rebuilt with synthetic data and documentation — GitHub">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
       </article>
     </div>
   </section>
 
   <section class="row contact">
-    <div class="meta"><span>İletişim</span></div>
+    <div class="meta"><span data-en="Contact">İletişim</span></div>
     <div>
-      <h2>İletişim</h2>
-      <p>İş fırsatları ve projeler hakkında bu adreslerden ulaşabilirsiniz.</p>
+      <h2 data-en="Contact">İletişim</h2>
+      <p data-en="For roles and projects, you can reach me here.">İş fırsatları ve projeler hakkında bu adreslerden ulaşabilirsiniz.</p>
       <div class="lines">
         <a href="mailto:ozisciegealp@icloud.com">ozisciegealp@icloud.com</a>
         <a href="https://www.linkedin.com/in/ege-alp-ozisci/">LinkedIn</a>
@@ -250,9 +267,37 @@
 
   <footer class="row">
     <div class="meta"></div>
-    <div>İzmir · Son güncelleme Eylül 2026</div>
+    <div data-en="İzmir · Last updated September 2026">İzmir · Son güncelleme Eylül 2026</div>
   </footer>
 
 </div>
+<script>
+(function(){
+  var TITLES={tr:"Ege Alp Özişci — Operasyon ve otomasyon kayıtları",en:"Ege Alp Özişci — Operations and automation record"};
+  var DESCS={tr:"Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.",
+             en:"A record of the reporting, planning, audit and tracking systems I built in multi-store retail operations."};
+  var btn=document.getElementById("lang");
+  var nodes=document.querySelectorAll("[data-en]");
+  for(var i=0;i<nodes.length;i++){nodes[i].setAttribute("data-tr",nodes[i].innerHTML);}
+  function setLang(l){
+    for(var i=0;i<nodes.length;i++){
+      nodes[i].innerHTML=nodes[i].getAttribute(l==="en"?"data-en":"data-tr");
+    }
+    document.documentElement.lang=l;
+    document.title=TITLES[l];
+    var m=document.querySelector('meta[name="description"]');
+    if(m){m.setAttribute("content",DESCS[l]);}
+    btn.textContent=(l==="en"?"Türkçe":"English");
+    try{localStorage.setItem("eao-lang",l);}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem("eao-lang");}catch(e){}
+  if(!saved){saved=(navigator.language||"").slice(0,2)==="tr"?"tr":"en";}
+  if(saved==="en"){setLang("en");}
+  btn.addEventListener("click",function(){
+    setLang(document.documentElement.lang==="en"?"tr":"en");
+  });
+})();
+</script>
 </body>
 </html>
