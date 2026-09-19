@@ -5,22 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ege Alp Özişci — Operasyon ve otomasyon kayıtları</title>
 <meta name="description" content="Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.">
+<meta name="author" content="Ege Alp Özişci">
+<meta name="theme-color" content="#F2F2ED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D1210" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Ege Alp Özişci — Operasyon ve otomasyon kayıtları">
+<meta property="og:description" content="16 mağazalık bölgede kurduğum raporlama, planlama, denetim ve takip sistemleri.">
+<meta property="og:url" content="https://ozisciegealp-sys.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F5D4C'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='%23F2F2ED' text-anchor='middle'%3EE%C3%96%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F1F2ED;
-    --ink:#16201C;
-    --ink-soft:#55605A;
-    --rule:#CDD1C8;
+    color-scheme:light;
+    --paper:#F2F2ED;
+    --raised:#FAFAF6;
+    --ink:#141A17;
+    --ink-soft:#5B665F;
+    --ink-faint:#8B948D;
+    --rule:#D5D9D0;
+    --hair:#E4E6DE;
     --accent:#1F5D4C;
-    --accent-soft:#E2EAE4;
-    --gutter:8.5rem;
-    --measure:38rem;
+    --grid:rgba(20,26,23,.05);
+    --gutter:9.5rem;
+    --measure:40rem;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   }
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --paper:#0D1210;
+    --raised:#141B18;
+    --ink:#E9EDE7;
+    --ink-soft:#96A19A;
+    --ink-faint:#6D7771;
+    --rule:#25302B;
+    --hair:#1C2622;
+    --accent:#6FD0AC;
+    --grid:rgba(233,237,231,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --paper:#0D1210;
+      --raised:#141B18;
+      --ink:#E9EDE7;
+      --ink-soft:#96A19A;
+      --ink-faint:#6D7771;
+      --rule:#25302B;
+      --hair:#1C2622;
+      --accent:#6FD0AC;
+      --grid:rgba(233,237,231,.05);
+    }
+  }
+
   *{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   body{
     background:var(--paper);
     color:var(--ink);
@@ -28,275 +69,544 @@
     font-size:17px;
     line-height:1.55;
     font-feature-settings:"tnum" 1;
-    padding:0 1.5rem 6rem;
+    padding:0 1.5rem 5rem;
+    position:relative;
+    overflow-x:hidden;
   }
+  /* sayfa bir kayıt föyü: çok soluk ızgara zemin */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background-image:
+      linear-gradient(var(--grid) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:72px 72px;
+    -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 0%,transparent 78%);
+    mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 0%,transparent 78%);
+  }
+
   .wrap{max-width:calc(var(--gutter) + var(--measure));margin:0 auto}
-
-  /* row = margin column + content column */
-  .row{display:grid;grid-template-columns:var(--gutter) minmax(0,1fr);gap:0 2rem}
-  .row > .meta{
-    font-size:.8125rem;
-    line-height:1.5;
-    color:var(--ink-soft);
-    padding-top:.3rem;
+  .row{display:grid;grid-template-columns:var(--gutter) minmax(0,1fr);gap:0 2.5rem;align-items:start}
+  .rail{
+    position:sticky;
+    top:1.75rem;
+    font-family:var(--mono);
+    font-size:.6875rem;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    padding-top:.55rem;
   }
-  .meta span{display:block}
+  .rail span{display:block}
+  .rail .tick{color:var(--accent);margin-bottom:.35rem}
 
-  /* masthead */
-  header{padding:3.5rem 0 0;position:relative}
-  .mark{
-    font-weight:700;
-    font-size:1.5rem;
-    letter-spacing:-.01em;
-    line-height:1;
+  .progress{
+    position:fixed;top:0;left:0;height:2px;width:0;
+    background:var(--accent);z-index:50;
   }
+  .skip{
+    position:absolute;left:-9999px;top:0;
+    background:var(--accent);color:var(--paper);
+    padding:.5rem .8rem;border-radius:3px;z-index:60;
+  }
+  .skip:focus{left:1rem;top:1rem}
+
+  header{padding:2.5rem 0 0}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .mark{font-weight:700;font-size:1.375rem;letter-spacing:-.015em;line-height:1}
   .mark em{font-style:normal;color:var(--accent)}
+  .tools{display:flex;gap:.4rem}
+  .btn{
+    font:inherit;font-family:var(--mono);font-size:.75rem;
+    color:var(--ink-soft);background:transparent;
+    border:1px solid var(--rule);border-radius:3px;
+    padding:.25rem .55rem;cursor:pointer;line-height:1.4;
+    transition:color .15s,border-color .15s;
+  }
+  .btn:hover{color:var(--accent);border-color:var(--accent)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
   .who{
-    margin-top:.6rem;
-    color:var(--ink-soft);
-    font-size:.9375rem;
-    max-width:30rem;
+    margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--hair);
+    color:var(--ink-soft);font-size:.9375rem;max-width:32rem;
   }
 
-  /* hero */
-  .hero{padding:4.5rem 0 4rem}
+  .hero{padding:4rem 0 3.25rem}
   h1{
-    font-size:clamp(1.9rem,5vw,2.9rem);
-    line-height:1.12;
-    letter-spacing:-.022em;
+    font-size:clamp(2rem,5.6vw,3.15rem);
+    line-height:1.08;
+    letter-spacing:-.028em;
     font-weight:600;
-    max-width:19ch;
+    max-width:17ch;
+    text-wrap:balance;
   }
-  .hero p{margin-top:1.4rem;max-width:34rem;color:var(--ink-soft)}
+  h1 b{font-weight:600;color:var(--accent)}
+  .hero .sub{margin-top:1.35rem;max-width:34rem;color:var(--ink-soft)}
 
-  .shift{
-    margin-top:2.6rem;
+  /* 60'a 1 oranını gerçek ölçekte gösteren blok */
+  .delta{
+    margin-top:2.4rem;max-width:34rem;
     border-top:2px solid var(--ink);
     border-bottom:1px solid var(--rule);
-    padding:1.1rem 0 1.3rem;
-    max-width:34rem;
+    padding:1.1rem 0 1.35rem;
   }
-  .shift-label{font-size:.8125rem;color:var(--ink-soft);margin-bottom:.7rem}
-  .shift-line{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
-  .figure{
-    font-size:clamp(1.6rem,4.5vw,2.1rem);
-    font-weight:700;
-    letter-spacing:-.02em;
-    line-height:1;
+  .delta-label{
+    font-family:var(--mono);font-size:.6875rem;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:1rem;
   }
-  .figure.was{color:var(--ink-soft);text-decoration:line-through;text-decoration-thickness:2px}
+  .bar-row{display:grid;grid-template-columns:4.8rem 1fr;align-items:center;gap:.9rem;margin-bottom:.55rem}
+  .bar-key{font-family:var(--mono);font-size:.8125rem;color:var(--ink-soft)}
+  .bar-track{height:.7rem;background:var(--hair);border-radius:2px;overflow:hidden}
+  .bar-fill{display:block;height:100%;background:var(--ink-faint);border-radius:2px;width:0}
+  .bar-fill.now{background:var(--accent)}
+  .bar-row.is-in .bar-fill{width:var(--w)}
+  @media (prefers-reduced-motion:no-preference){
+    .bar-fill{transition:width .9s cubic-bezier(.2,.75,.25,1)}
+    .bar-row+.bar-row .bar-fill{transition-delay:.18s}
+  }
+  .delta-figures{display:flex;align-items:baseline;gap:.9rem;margin-top:1.1rem;flex-wrap:wrap}
+  .figure{font-size:clamp(1.5rem,4vw,2rem);font-weight:700;letter-spacing:-.02em;line-height:1}
+  .figure.was{color:var(--ink-faint);text-decoration:line-through;text-decoration-thickness:2px}
   .figure.now{color:var(--accent)}
-  .figure-unit{font-size:.9375rem;font-weight:500;letter-spacing:0}
-  .arrow{color:var(--ink-soft);font-size:1.1rem}
+  .figure u{font-size:.875rem;font-weight:500;letter-spacing:0;text-decoration:none}
+  .arrow{color:var(--ink-faint)}
 
-  /* sections */
-  section{padding-top:3.75rem}
-  h2{
-    font-size:1.0625rem;
-    font-weight:700;
-    letter-spacing:-.005em;
-    padding-bottom:.55rem;
-    border-bottom:2px solid var(--ink);
+  .metrics{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-top:2.6rem;
   }
-  .lede{margin-top:1.1rem;color:var(--ink-soft);max-width:34rem}
+  .tile{padding:1.1rem 1rem 1.15rem 0;border-right:1px solid var(--hair)}
+  .tile:last-child{border-right:0}
+  .tile-num{
+    font-family:var(--mono);font-size:1.5rem;font-weight:500;
+    letter-spacing:-.02em;line-height:1;color:var(--ink);
+  }
+  .tile-num small{font-size:.8125rem;color:var(--ink-faint);margin-left:.12rem}
+  .tile-label{margin-top:.45rem;font-size:.8125rem;color:var(--ink-soft);line-height:1.35}
 
-  /* records */
-  .record{
-    border-bottom:1px solid var(--rule);
-    padding:1.75rem 0;
+  section{padding-top:4rem;scroll-margin-top:1.5rem}
+  h2{font-size:1.125rem;font-weight:700;letter-spacing:-.008em;padding-bottom:.6rem;border-bottom:2px solid var(--ink)}
+  .lede{margin-top:1.1rem;color:var(--ink-soft);max-width:34rem;font-size:.9375rem}
+
+  .rec{
+    position:relative;
+    border-bottom:1px solid var(--hair);
+    padding:1.9rem 0 1.9rem 3.2rem;
   }
-  .record h3{
-    font-size:1.1875rem;
-    font-weight:600;
-    letter-spacing:-.012em;
-    line-height:1.3;
+  .rec::before{
+    content:attr(data-idx);
+    position:absolute;left:0;top:2.05rem;
+    font-family:var(--mono);font-size:.75rem;color:var(--ink-faint);
   }
-  .record p{margin-top:.6rem;max-width:34rem}
-  .record .was-line{margin-top:.75rem;color:var(--ink-soft);font-size:.9375rem}
-  .stack{
-    margin-top:.9rem;
-    font-size:.8125rem;
-    color:var(--ink-soft);
+  .rec::after{
+    content:"";position:absolute;left:1.9rem;top:1.9rem;bottom:1.9rem;
+    width:2px;background:var(--hair);border-radius:2px;
   }
-  .status{
-    display:inline-block;
-    font-size:.75rem;
-    font-weight:600;
-    padding:.18rem .5rem;
-    border-radius:2px;
-    background:var(--accent-soft);
-    color:var(--accent);
-    margin-bottom:.7rem;
+  .rec:hover::after,.rec:focus-within::after{background:var(--accent)}
+  @media (prefers-reduced-motion:no-preference){.rec::after{transition:background .2s}}
+  .rec-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .rec h3{font-size:1.1875rem;font-weight:600;letter-spacing:-.014em;line-height:1.3;max-width:28ch}
+  .per{font-family:var(--mono);font-size:.75rem;color:var(--ink-faint);white-space:nowrap}
+  .rec p{margin-top:.7rem;max-width:34rem;font-size:.9375rem}
+
+  .ba{
+    margin-top:1rem;display:grid;gap:.3rem;max-width:34rem;
+    padding:.7rem .85rem;background:var(--raised);
+    border:1px solid var(--hair);border-radius:4px;
   }
-  .status.wip{background:transparent;color:var(--ink-soft);border:1px solid var(--rule)}
-  .langbtn{
-    position:absolute;
-    top:3.5rem;
-    right:0;
-    font:inherit;
-    font-size:.8125rem;
-    color:var(--accent);
-    background:none;
-    border:1px solid var(--rule);
-    border-radius:2px;
-    padding:.1rem .45rem;
-    cursor:pointer;
-    line-height:1.4;
+  .ba div{display:grid;grid-template-columns:4.2rem 1fr;gap:.6rem;align-items:baseline}
+  .ba-k{font-family:var(--mono);font-size:.6875rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .ba-v{font-size:.875rem;color:var(--ink-soft)}
+  .ba div+div .ba-v{color:var(--accent);font-weight:500}
+
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+  .chips li{
+    font-family:var(--mono);font-size:.6875rem;color:var(--ink-soft);
+    border:1px solid var(--hair);border-radius:99px;padding:.15rem .55rem;
   }
-  .langbtn:hover{border-color:var(--accent)}
-  .langbtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .repo{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-size:.9375rem;font-weight:500}
+  .repo .arr{font-size:.8125rem}
+  @media (prefers-reduced-motion:no-preference){
+    .repo .arr{transition:transform .18s}
+    .repo:hover .arr{transform:translate(2px,-2px)}
+  }
   a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
   a:hover{text-decoration-thickness:2px}
   a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-  .repo{display:inline-block;margin-top:.9rem;font-size:.9375rem;font-weight:500}
 
-  /* skills */
-  .group{border-bottom:1px solid var(--rule);padding:1.1rem 0}
-  .group h3{font-size:.9375rem;font-weight:600;margin-bottom:.3rem}
-  .group p{color:var(--ink-soft);font-size:.9375rem;max-width:34rem}
+  .contact p{max-width:34rem;margin-top:1.1rem;font-size:.9375rem}
+  .lines{margin-top:1.5rem;display:flex;flex-direction:column;gap:.65rem;align-items:flex-start;font-size:1.0625rem;font-weight:500}
+  .mail-wrap{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+  .mail{
+    font:inherit;font-size:1.0625rem;font-weight:500;
+    background:none;border:0;padding:0;cursor:pointer;
+    color:var(--accent);text-decoration:none;
+  }
+  .mail-label{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
+  .mail:hover .mail-label{text-decoration-thickness:2px}
+  .mail:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+  .mail-note{
+    font-family:var(--mono);font-size:.6875rem;letter-spacing:.07em;
+    text-transform:uppercase;color:var(--ink-faint);
+    opacity:0;font-weight:400;
+  }
+  .mail-note.on{opacity:1}
+  @media (prefers-reduced-motion:no-preference){.mail-note{transition:opacity .2s}}
 
-  /* contact */
-  .contact p{max-width:34rem;margin-top:1.1rem}
-  .contact .lines{margin-top:1.4rem;font-weight:500}
-  .contact .lines a{display:inline-block;margin-right:1.5rem;margin-bottom:.4rem}
+  footer{
+    margin-top:4rem;padding-top:1.1rem;border-top:1px solid var(--hair);
+    font-family:var(--mono);font-size:.6875rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  .foot-line{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
-  footer{padding-top:3.5rem;color:var(--ink-soft);font-size:.8125rem}
-
-  /* one page-load reveal, hero only */
   @media (prefers-reduced-motion:no-preference){
-    .shift{animation:rise .5s cubic-bezier(.2,.7,.3,1) .15s both}
-    @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .rv{opacity:0;transform:translateY(10px)}
+    .rv.is-in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.2,.7,.3,1),transform .5s cubic-bezier(.2,.7,.3,1)}
+    .progress{transition:width .08s linear}
   }
 
-  @media (max-width:720px){
+  @media (max-width:820px){
     :root{--gutter:0px}
     .row{grid-template-columns:1fr;gap:0}
-    .row > .meta{padding-top:0;margin-bottom:.5rem}
-    .meta span{display:inline;margin-right:.9rem}
+    .rail{position:static;padding-top:0;margin-bottom:.7rem}
+    .rail span{display:inline;margin-right:.8rem}
+    .rail .tick{display:none}
+    .metrics{grid-template-columns:repeat(2,1fr)}
+    .tile{padding-right:1rem}
+    .tile:nth-child(2){border-right:0}
+    .tile:nth-child(1),.tile:nth-child(2){border-bottom:1px solid var(--hair)}
+    .tile:nth-child(3){grid-column:1/-1}
     body{font-size:16px}
   }
+  @media (max-width:420px){
+    .rec{padding-left:2.6rem}
+    .rec::after{left:1.4rem}
+    .ba div{grid-template-columns:1fr;gap:0}
+  }
+
+  @media print{
+    body{padding:0;font-size:11pt;color:#000;background:#fff}
+    body::before,.progress,.tools,.skip{display:none!important}
+    .row{grid-template-columns:1fr}
+    .rail{position:static;color:#555}
+    .rec{break-inside:avoid}
+    a{color:#000;text-decoration:none}
+    .repo::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+  }
 </style>
+<noscript><style>
+  /* JS kapalıysa: kayıtlar gizli kalmasın, adres görünsün */
+  .rv{opacity:1!important;transform:none!important}
+  .bar-fill{width:var(--w)!important}
+  .mail{cursor:default}
+  .mail-label{display:none}
+  .mail::after{content:attr(data-user) "@" attr(data-host);text-decoration:underline;text-underline-offset:.18em}
+</style></noscript>
 </head>
 <body>
+<a class="skip" href="#main" data-en="Skip to content">İçeriğe geç</a>
+<div class="progress" id="progress"></div>
+
 <div class="wrap">
 
   <header class="row">
-    <button id="lang" type="button" class="langbtn">English</button>
-    <div class="meta"><span>İzmir</span></div>
+    <div class="rail" aria-hidden="true"></div>
     <div>
-      <div class="mark">Ege Alp <em>Özişci</em></div>
-      <p class="who" data-en="About five years in retail management. I ran reporting, audit and training projects across a 16-store area. This page is the record of that work.">Perakende operasyonlarında yaklaşık beş yıl yöneticilik. 16 mağazalık bölgede raporlama, denetim ve eğitim projeleri yürüttüm. Bu sayfa, o projelerin kaydı.</p>
+      <div class="bar">
+        <div class="mark">Ege Alp <em>Özişci</em></div>
+        <div class="tools">
+          <button id="theme" type="button" class="btn">Koyu</button>
+          <button id="lang" type="button" class="btn">English</button>
+        </div>
+      </div>
+      <p class="who" data-en="Retail operations manager. This page is the record of the reporting, planning, audit and tracking systems I built across a 16-store area — each one with a working version, rebuilt with synthetic data, on GitHub.">Perakende operasyon yöneticisi. Bu sayfa, 16 mağazalık bölgede kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı — her birinin sahte veriyle çalışan sürümü GitHub'da.</p>
     </div>
   </header>
 
-  <div class="hero row">
-    <div class="meta"><span data-en="Record">Kayıt</span><span>2026</span></div>
-    <div>
-      <h1 data-en="I cut the daily area report from an hour to a minute.">Günlük bölge raporunu bir saatten bir dakikaya indirdim.</h1>
-      <p data-en="With a VBA system running on Excel and Oracle across a 16-store area. About 250 hours of manual work removed per year.">16 mağazalık bölgede, Excel ve Oracle üzerinde VBA ile çalışan bir sistemle. Yıllık karşılığı yaklaşık 250 saatlik elle iş.</p>
+  <main id="main">
 
-      <div class="shift">
-        <div class="shift-label" data-en="Area report — daily preparation time (approx.)">Bölge raporu — günlük hazırlık süresi (yaklaşık)</div>
-        <div class="shift-line">
-          <span class="figure was">60<span class="figure-unit" data-en=" min"> dk</span></span>
-          <span class="arrow">→</span>
-          <span class="figure now">1<span class="figure-unit" data-en=" min"> dk</span></span>
+  <div class="hero row">
+    <div class="rail"><span class="tick">●</span><span data-en="Record">Kayıt</span><span>2026</span></div>
+    <div>
+      <h1 data-en="I cut the daily area report from an hour to <b>one minute</b>.">Günlük bölge raporunu bir saatten <b>bir dakikaya</b> indirdim.</h1>
+      <p class="sub" data-en="With a VBA system running on Excel and Oracle across a 16-store area. About 250 hours of manual work removed per year.">16 mağazalık bölgede, Excel ve Oracle üzerinde VBA ile çalışan bir sistemle. Yıllık karşılığı yaklaşık 250 saatlik elle iş.</p>
+
+      <div class="delta">
+        <div class="delta-label" data-en="Area report — daily preparation time (approx.)">Bölge raporu — günlük hazırlık süresi (yaklaşık)</div>
+        <div class="bar-row" data-bar>
+          <span class="bar-key" data-en="before">önce</span>
+          <span class="bar-track"><span class="bar-fill" style="--w:100%"></span></span>
+        </div>
+        <div class="bar-row" data-bar>
+          <span class="bar-key" data-en="after">sonra</span>
+          <span class="bar-track"><span class="bar-fill now" style="--w:1.7%"></span></span>
+        </div>
+        <div class="delta-figures">
+          <span class="figure was"><span data-count="60">60</span><u data-en=" min"> dk</u></span>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="figure now">1<u data-en=" min"> dk</u></span>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div class="tile">
+          <div class="tile-num"><span data-count="16">16</span></div>
+          <div class="tile-label" data-en="stores in the area I worked across">mağazalık bölge kapsamı</div>
+        </div>
+        <div class="tile">
+          <div class="tile-num"><span data-count="6">6</span></div>
+          <div class="tile-label" data-en="areas the par level model rolled out to">bölgeye yaygınlaşan model</div>
+        </div>
+        <div class="tile">
+          <div class="tile-num"><small>~</small><span data-count="250">250</span><small>sa</small></div>
+          <div class="tile-label" data-en="manual hours removed per year">yılda ortadan kalkan elle iş</div>
         </div>
       </div>
     </div>
   </div>
 
-  <section class="row">
-    <div class="meta"><span data-en="Projects">Projeler</span></div>
+  <section class="row" id="projeler">
+    <div class="rail"><span class="tick">●</span><span data-en="Projects">Projeler</span><span>05</span></div>
     <div>
-      <h2 data-en="Projects and responsibilities">Projeler ve sorumluluklar</h2>
-      <p class="lede" data-en="Each entry gives the period, the scope and the work. Where a file could be shared, it links to a version rebuilt with synthetic data.">Her kayıtta dönem, kapsam ve yapılan iş var. Kodu veya dosyası paylaşılabilen projelerde, sahte veriyle hazırlanmış sürümün bağlantısı yer alıyor.</p>
+      <h2 data-en="The systems">Kurduğum sistemler</h2>
+      <p class="lede" data-en="Each entry gives the period, the scope and the work, and links to a working version rebuilt with synthetic data. Only the work I can show a file for is listed here.">Her kayıtta dönem, kapsam ve yapılan iş var; her birinin sahte veriyle yeniden kurulmuş çalışan sürümü bağlantılı. Bu sayfada yalnızca dosyasını gösterebildiğim işler yer alıyor.</p>
 
-      <article class="record">
-        <span class="status">2022–2026</span>
-        <h3 data-en="Area reporting automation">Bölge raporlama otomasyonu</h3>
+      <article class="rec rv" data-idx="01">
+        <div class="rec-head">
+          <h3 data-en="Area reporting automation">Bölge raporlama otomasyonu</h3>
+          <span class="per">2022–2026</span>
+        </div>
         <p data-en="Automated the daily area report with a VBA architecture running on Excel and Oracle. I built it as an assistant manager and later brought further daily operational tasks into its scope.">Günlük bölge raporunu VBA mimarisiyle otomatikleştirdim; sistem Excel ve Oracle üzerinde çalışıyor. Müdür yardımcısıyken kurdum, sonra ek günlük operasyonel görevleri de kapsama aldım.</p>
-        <p class="was-line" data-en="Before: about 1 hour of manual preparation per day. After: about 1 minute, roughly 250 hours a year.">Öncesi: günlük yaklaşık 1 saatlik elle hazırlık. Sonrası: yaklaşık 1 dakika, yılda yaklaşık 250 saat.</p>
-        <div class="stack" data-en="Scope: 16 stores · Starbucks · Excel · VBA · Oracle">Kapsam: 16 mağaza · Starbucks · Excel · VBA · Oracle</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/store-markout-form" data-en="The store-level part of the report: end-of-day mark-out form, with synthetic data — GitHub">Bölge raporunun mağaza ayağı: gün sonu (mark-out) formu, sahte veriyle — GitHub</a>
+        <div class="ba">
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="about 1 hour of manual preparation, every day">her gün yaklaşık 1 saat elle hazırlık</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="about 1 minute — roughly 250 hours a year">yaklaşık 1 dakika — yılda yaklaşık 250 saat</span></div>
+        </div>
+        <ul class="chips">
+          <li data-en="16 stores">16 mağaza</li><li>Starbucks</li><li>Excel</li><li>VBA</li><li>Oracle</li>
+        </ul>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-markout-form"><span data-en="Store-level part of the report: end-of-day mark-out form">Raporun mağaza ayağı: gün sonu (mark-out) formu</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
-      <article class="record">
-        <span class="status">2023–2026</span>
-        <h3 data-en="Capacity planning and automated par level model">Kapasite planlama ve otomatik par level modeli</h3>
+
+      <article class="rec rv" data-idx="02">
+        <div class="rec-head">
+          <h3 data-en="Capacity planning and automated par level model">Kapasite planlama ve otomatik par level modeli</h3>
+          <span class="per">2023–2026</span>
+        </div>
         <p data-en="A model that converts forecast business volume into required store capacity and storage space, feeding into new store planning. On top of it I built a par level structure that calculates order quantities per item from the last month of store sales. Used in 16 stores, then rolled out to 6 areas through the area manager.">Öngörülen iş hacmini gerekli mağaza kapasitesine ve depolama ihtiyacına dönüştüren bir hesaplama modeli; yeni mağaza planlamasına girdi sağladı. Aynı modelin üzerine, mağazaların son bir aylık satış verisinden ürün bazında sipariş miktarını otomatik hesaplayan par level yapısını kurdum. 16 mağazada uygulandıktan sonra bölge müdürü aracılığıyla 6 bölgeye yaygınlaştırıldı.</p>
-        <p class="was-line" data-en="Before: every store calculated its order item by item, by hand.">Öncesi: her mağazanın siparişi kalem kalem elle hesaplanıyordu.</p>
-        <div class="stack" data-en="Scope: 16 stores, rolled out to 6 areas · Starbucks · Excel">Kapsam: 16 mağaza, 6 bölgeye yaygınlaştırıldı · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model" data-en="Working version with synthetic data and documentation — GitHub">Sahte veriyle çalışan sürüm ve açıklama — GitHub</a>
+        <div class="ba">
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="every store calculated its order item by item, by hand">her mağazanın siparişi kalem kalem elle hesaplanıyordu</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="order quantities calculated from sales data, across 6 areas">satış verisinden hesaplanan sipariş miktarı, 6 bölgede</span></div>
+        </div>
+        <ul class="chips">
+          <li data-en="16 stores → 6 areas">16 mağaza → 6 bölge</li><li>Starbucks</li><li>Excel</li>
+        </ul>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model"><span data-en="Working version with synthetic data and documentation">Sahte veriyle çalışan sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
-      <article class="record">
-        <span class="status">2025–2026</span>
-        <h3 data-en="Area KPI control platform">Bölge KPI kontrol platformu</h3>
+
+      <article class="rec rv" data-idx="03">
+        <div class="rec-head">
+          <h3 data-en="Area KPI control platform">Bölge KPI kontrol platformu</h3>
+          <span class="per">2025–2026</span>
+        </div>
         <p data-en="An online Excel platform where profitability, sales, customer complaints, CRM usage and store-level internal calculations are tracked in one structure. I ran the monthly reviews and made sure deviations turned into store-level actions.">Kârlılık, satış, müşteri şikâyetleri, CRM kullanım oranı ve mağaza bazlı iç hesaplamaların tek yapı üzerinden izlendiği online Excel platformu. Aylık kontrollerini yürüttüm ve sapmaların mağaza bazında aksiyona bağlanmasını sağladım.</p>
-        <div class="stack" data-en="Scope: 16 stores · Starbucks · Excel">Kapsam: 16 mağaza · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/regional-kpi-dashboard" data-en="Version rebuilt with synthetic data and documentation — GitHub">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
+        <ul class="chips">
+          <li data-en="16 stores">16 mağaza</li><li>Starbucks</li><li>Excel</li><li>CRM</li>
+        </ul>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/regional-kpi-dashboard"><span data-en="Version rebuilt with synthetic data and documentation">Sahte veriyle yeniden kurulmuş sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
-      <article class="record">
-        <span class="status">2025–2026</span>
-        <h3 data-en="Internal audit standardisation and audit-driven area training programme">İç denetim standardizasyonu ve denetim verisinden bölge eğitim programı</h3>
+
+      <article class="rec rv" data-idx="04">
+        <div class="rec-head">
+          <h3 data-en="Internal audit standardisation and audit-driven training programme">İç denetim standardizasyonu ve denetim verisinden eğitim programı</h3>
+          <span class="per">2025–2026</span>
+        </div>
         <p data-en="Brought the pre-audit process and corrective and preventive action tracking into one shared structure across stores, and planned the rotation in which store managers audit and support each other. Collected food safety audit results in a single data set, ranked the most frequent non-conformities, turned the findings into training content and presented it to the area manager, leading to an area-wide training programme.">Ön denetim akışını ve düzeltici-önleyici faaliyet takibini mağazalar arasında tek ortak yapıya bağladım; mağaza müdürlerinin karşılıklı iç denetim ve destek rotasyonlarını planlayıp yönettim. Gıda güvenliği denetim sonuçlarını tek veri setinde toplayıp en sık tekrar eden uygunsuzlukları önceliklendirdim, bulguları eğitim içeriğine dönüştürüp bölge müdürüne sundum ve bölge çapında bir eğitim sisteminin kurulmasına öncülük ettim.</p>
-        <div class="stack" data-en="Scope: 16 stores · Starbucks · Excel">Kapsam: 16 mağaza · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/internal-audit-tracker" data-en="Version rebuilt with synthetic data and documentation — GitHub">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
+        <ul class="chips">
+          <li data-en="16 stores">16 mağaza</li><li>Starbucks</li><li>Excel</li><li data-en="Food safety">Gıda güvenliği</li>
+        </ul>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/internal-audit-tracker"><span data-en="Version rebuilt with synthetic data and documentation">Sahte veriyle yeniden kurulmuş sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
-      <article class="record">
-        <span class="status">2024–2026</span>
-        <h3 data-en="Annual leave tracking system">Yıllık izin takip sistemi</h3>
+
+      <article class="rec rv" data-idx="05">
+        <div class="rec-head">
+          <h3 data-en="Annual leave tracking system">Yıllık izin takip sistemi</h3>
+          <span class="per">2024–2026</span>
+        </div>
         <p data-en="Built and ran an Excel-based system that tracks upcoming annual leave entitlements for all staff across the 6 areas in the operation.">Operasyona bağlı 6 bölgedeki tüm personelin yaklaşan yıllık izin haklarını izleyen Excel tabanlı takip sistemini kurdum ve işler hâle getirdim.</p>
-        <div class="stack" data-en="Scope: 6 areas · Starbucks · Excel">Kapsam: 6 bölge · Starbucks · Excel</div>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/annual-leave-tracker" data-en="Version rebuilt with synthetic data and documentation — GitHub">Sahte veriyle yeniden kurulmuş sürüm ve açıklama — GitHub</a>
+        <ul class="chips">
+          <li data-en="6 areas">6 bölge</li><li>Starbucks</li><li>Excel</li>
+        </ul>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/annual-leave-tracker"><span data-en="Version rebuilt with synthetic data and documentation">Sahte veriyle yeniden kurulmuş sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
+
     </div>
   </section>
-
-  <section class="row contact">
-    <div class="meta"><span data-en="Contact">İletişim</span></div>
+  <section class="row contact" id="iletisim">
+    <div class="rail"><span class="tick">●</span><span data-en="Contact">İletişim</span></div>
     <div>
       <h2 data-en="Contact">İletişim</h2>
-      <p data-en="For roles and projects, you can reach me here.">İş fırsatları ve projeler hakkında bu adreslerden ulaşabilirsiniz.</p>
+      <p data-en="For roles and projects, you can reach me here. Based in İzmir.">İş fırsatları ve projeler hakkında bu adreslerden ulaşabilirsiniz. İzmir'deyim.</p>
       <div class="lines">
-        <a href="mailto:ozisciegealp@icloud.com">ozisciegealp@icloud.com</a>
+        <span class="mail-wrap">
+          <button type="button" class="mail" id="mail" data-user="ozisciegealp" data-host="icloud.com"><span class="mail-label" data-en="Email">E-posta</span></button>
+          <span class="mail-note" id="mail-note" role="status"></span>
+        </span>
         <a href="https://www.linkedin.com/in/ege-alp-ozisci/">LinkedIn</a>
         <a href="https://github.com/ozisciegealp-sys">GitHub</a>
       </div>
     </div>
   </section>
 
+  </main>
+
   <footer class="row">
-    <div class="meta"></div>
-    <div data-en="İzmir · Last updated September 2026">İzmir · Son güncelleme Eylül 2026</div>
+    <div class="rail" aria-hidden="true"></div>
+    <div class="foot-line">
+      <span>İzmir</span>
+      <span data-en="Last updated September 2026">Son güncelleme Eylül 2026</span>
+    </div>
   </footer>
 
 </div>
+
 <script>
 (function(){
-  var TITLES={tr:"Ege Alp Özişci — Operasyon ve otomasyon kayıtları",en:"Ege Alp Özişci — Operations and automation record"};
+  "use strict";
+  var root=document.documentElement;
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+
+  /* ---- tema ---- */
+  var themeBtn=document.getElementById("theme");
+  function isDark(){
+    var t=root.getAttribute("data-theme");
+    if(t){return t==="dark";}
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function paintThemeBtn(){
+    var dark=isDark(),en=root.lang==="en";
+    themeBtn.textContent=dark?(en?"Light":"Açık"):(en?"Dark":"Koyu");
+    themeBtn.setAttribute("aria-label",dark?(en?"Switch to light theme":"Açık temaya geç"):(en?"Switch to dark theme":"Koyu temaya geç"));
+  }
+  var savedTheme=load("eao-theme");
+  if(savedTheme==="dark"||savedTheme==="light"){root.setAttribute("data-theme",savedTheme);}
+  themeBtn.addEventListener("click",function(){
+    var next=isDark()?"light":"dark";
+    root.setAttribute("data-theme",next);
+    store("eao-theme",next);
+    paintThemeBtn();
+  });
+
+  /* ---- e-posta: tıklayınca adres açığa çıkar ve kopyalanır ---- */
+  var mailBtn=document.getElementById("mail");
+  var mailNote=document.getElementById("mail-note");
+  var mailLabel=mailBtn?mailBtn.querySelector(".mail-label"):null;
+  var mailAddr=mailBtn?mailBtn.getAttribute("data-user")+"@"+mailBtn.getAttribute("data-host"):"";
+  var mailShown=false,mailTimer=null;
+  function paintMail(){
+    if(!mailBtn){return;}
+    var en=root.lang==="en";
+    if(mailShown){mailLabel.textContent=mailAddr;}
+    mailBtn.setAttribute("aria-label",en?("Email address "+mailAddr+" — click to copy"):("E-posta adresi "+mailAddr+" — kopyalamak için tıklayın"));
+  }
+  if(mailBtn){
+    mailBtn.addEventListener("click",function(){
+      var en=root.lang==="en";
+      mailShown=true;
+      mailLabel.textContent=mailAddr;
+      function flash(msg){
+        mailNote.textContent=msg;
+        mailNote.classList.add("on");
+        if(mailTimer){window.clearTimeout(mailTimer);}
+        mailTimer=window.setTimeout(function(){mailNote.classList.remove("on");},2600);
+      }
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(mailAddr).then(
+          function(){flash(en?"copied":"kopyalandı");},
+          function(){flash(en?"select and copy":"seçip kopyalayın");}
+        );
+      }else{
+        flash(en?"select and copy":"seçip kopyalayın");
+      }
+    });
+  }
+
+  /* ---- dil ---- */
+  var TITLES={tr:"Ege Alp Özişci — Operasyon ve otomasyon kayıtları",
+              en:"Ege Alp Özişci — Operations and automation record"};
   var DESCS={tr:"Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.",
              en:"A record of the reporting, planning, audit and tracking systems I built in multi-store retail operations."};
-  var btn=document.getElementById("lang");
+  var langBtn=document.getElementById("lang");
   var nodes=document.querySelectorAll("[data-en]");
   for(var i=0;i<nodes.length;i++){nodes[i].setAttribute("data-tr",nodes[i].innerHTML);}
   function setLang(l){
     for(var i=0;i<nodes.length;i++){
       nodes[i].innerHTML=nodes[i].getAttribute(l==="en"?"data-en":"data-tr");
     }
-    document.documentElement.lang=l;
+    root.lang=l;
     document.title=TITLES[l];
     var m=document.querySelector('meta[name="description"]');
     if(m){m.setAttribute("content",DESCS[l]);}
-    btn.textContent=(l==="en"?"Türkçe":"English");
-    try{localStorage.setItem("eao-lang",l);}catch(e){}
+    langBtn.textContent=(l==="en"?"Türkçe":"English");
+    langBtn.setAttribute("aria-label",l==="en"?"Türkçe'ye geç":"Switch to English");
+    paintThemeBtn();
+    paintMail();
+    store("eao-lang",l);
   }
-  var saved=null;
-  try{saved=localStorage.getItem("eao-lang");}catch(e){}
-  if(!saved){saved=(navigator.language||"").slice(0,2)==="tr"?"tr":"en";}
-  if(saved==="en"){setLang("en");}
-  btn.addEventListener("click",function(){
-    setLang(document.documentElement.lang==="en"?"tr":"en");
-  });
+  var savedLang=load("eao-lang");
+  if(!savedLang){savedLang=(navigator.language||"").slice(0,2)==="tr"?"tr":"en";}
+  setLang(savedLang==="en"?"en":"tr");
+  langBtn.addEventListener("click",function(){setLang(root.lang==="en"?"tr":"en");});
+
+  /* ---- okuma çubuğu ---- */
+  var prog=document.getElementById("progress"),ticking=false;
+  function paintProgress(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    var p=h>0?(window.pageYOffset/h)*100:0;
+    prog.style.width=(p<0?0:(p>100?100:p))+"%";
+    ticking=false;
+  }
+  window.addEventListener("scroll",function(){
+    if(!ticking){ticking=true;window.requestAnimationFrame(paintProgress);}
+  },{passive:true});
+  paintProgress();
+
+  /* ---- görünürlükte: sayaçlar, çubuklar, kayıtlar ---- */
+  function countUp(el){
+    var target=parseInt(el.getAttribute("data-count"),10);
+    if(isNaN(target)){return;}
+    if(reduce){el.textContent=target;return;}
+    var start=null,dur=900;
+    el.textContent="0";
+    function step(ts){
+      if(start===null){start=ts;}
+      var t=Math.min((ts-start)/dur,1);
+      el.textContent=Math.round(target*(1-Math.pow(1-t,3)));
+      if(t<1){window.requestAnimationFrame(step);}
+    }
+    window.requestAnimationFrame(step);
+  }
+  var watch=document.querySelectorAll(".rv,[data-bar],[data-count]");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(entries){
+      for(var i=0;i<entries.length;i++){
+        if(!entries[i].isIntersecting){continue;}
+        var el=entries[i].target;
+        el.classList.add("is-in");
+        if(el.hasAttribute("data-count")){countUp(el);}
+        io.unobserve(el);
+      }
+    },{rootMargin:"0px 0px -8% 0px",threshold:0.15});
+    for(var j=0;j<watch.length;j++){io.observe(watch[j]);}
+  }else{
+    for(var k=0;k<watch.length;k++){watch[k].classList.add("is-in");}
+  }
 })();
 </script>
 </body>
