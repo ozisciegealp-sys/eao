@@ -11,7 +11,15 @@
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Ege Alp Özişci — Operasyon ve otomasyon kayıtları">
 <meta property="og:description" content="16 mağazalık bölgede kurduğum raporlama, planlama, denetim ve takip sistemleri.">
-<meta property="og:url" content="https://ozisciegealp-sys.github.io/">
+<meta property="og:url" content="https://ozisciegealp-sys.github.io/eao/">
+<meta property="og:image" content="https://ozisciegealp-sys.github.io/eao/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ege Alp Özişci — bölge KPI genel tablosunun ekran görüntüsü, sahte veriyle">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ozisciegealp-sys.github.io/eao/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F5D4C'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='%23F2F2ED' text-anchor='middle'%3EE%C3%96%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -408,7 +416,7 @@
           <span class="per">2022–2026</span>
         </div>
         <p class="sum" data-en="Automated the daily area report with VBA; preparation time fell from about 1 hour to about 1 minute.">Günlük bölge raporunu VBA ile otomatikleştirdim; hazırlık süresi yaklaşık 1 saatten 1 dakikaya indi.</p>
-        <div class="flow" role="img" aria-label="Oracle satış raporu, Excel ve VBA, günlük bölge raporu">
+        <div class="flow" role="img" aria-label="Veri akışı: Oracle satış raporu, Excel ve VBA, günlük bölge raporu" data-aria-en="Data flow: Oracle sales report, Excel and VBA, daily area report">
           <span class="fl-node" data-en="Oracle sales report">Oracle satış raporu</span>
           <span class="fl-arr" aria-hidden="true">→</span>
           <span class="fl-node fl-mid">Excel + VBA</span>
@@ -621,6 +629,11 @@
   function setLang(l){
     for(var i=0;i<nodes.length;i++){
       nodes[i].innerHTML=nodes[i].getAttribute(l==="en"?"data-en":"data-tr");
+    }
+    var arias=document.querySelectorAll("[data-aria-en]");
+    for(var k=0;k<arias.length;k++){
+      if(!arias[k].hasAttribute("data-aria-tr")){arias[k].setAttribute("data-aria-tr",arias[k].getAttribute("aria-label"));}
+      arias[k].setAttribute("aria-label",arias[k].getAttribute(l==="en"?"data-aria-en":"data-aria-tr"));
     }
     var imgs=document.querySelectorAll("img[data-alt-en]");
     for(var j=0;j<imgs.length;j++){
