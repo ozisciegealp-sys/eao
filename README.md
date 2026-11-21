@@ -1,5 +1,7 @@
 # eao
 
+**Türkçe** | [English](README.en.md)
+
 Operasyon projelerimin kayıt sitesi: **https://ozisciegealp-sys.github.io/eao/**
 
 Çok şubeli perakende ve F&B operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin listesi. Her kayıtta dönem, kapsam ve yapılan iş var; paylaşılabilen projelerde sahte veriyle hazırlanmış çalışan sürümün bağlantısı yer alıyor.
@@ -22,4 +24,4 @@ Sitenin tamamı tek bir `index.html` dosyasıdır: HTML ve CSS aynı dosyada, ha
 
 ## İletişim
 
-ozisciegealp@icloud.com · [LinkedIn](https://www.linkedin.com/in/ege-alp-ozisci/)
+ozisciegealp@gmail.com · [LinkedIn](https://www.linkedin.com/in/ege-alp-ozisci/)
