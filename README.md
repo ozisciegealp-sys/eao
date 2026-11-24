@@ -2,26 +2,26 @@
 
 **Türkçe** | [English](README.en.md)
 
-Operasyon projelerimin kayıt sitesi: **https://ozisciegealp-sys.github.io/eao/**
+Operasyon ve otomasyon projelerimin kayıt sitesi: **https://ozisciegealp-sys.github.io/eao/**
 
-Çok şubeli perakende ve F&B operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin listesi. Her kayıtta dönem, kapsam ve yapılan iş var; paylaşılabilen projelerde sahte veriyle hazırlanmış çalışan sürümün bağlantısı yer alıyor.
+Çok şubeli perakende ve F&B operasyonunda mağaza yöneticiliğime paralel olarak 16 mağazalık bölgede kurduğum ve 6 bölgeye yaygınlaştırdığım raporlama, kapasite planlama, KPI kontrol, iç denetim ve izin takip sistemlerinin kaydı.
+
+> **Gizlilik ve Sentetik Veri Notu:** Kurumsal gizlilik gereği marka adları, şirket verileri ve kişisel kayıtlar çıkarılmıştır. Bağlı depolardaki tüm Excel ve VBA çalışma kitapları %100 sentetik (kurgu) veriyle çalışacak şekilde hazırlanmıştır.
 
 ## Projeler
 
-| Proje | Depo |
-|---|---|
-| Bölge raporlama otomasyonu (mağaza ayağı) | [store-markout-form](https://github.com/ozisciegealp-sys/store-markout-form) |
-| Kapasite planlama ve otomatik par level modeli | [store-par-level-model](https://github.com/ozisciegealp-sys/store-par-level-model) |
-| Bölge KPI kontrol platformu | [regional-kpi-dashboard](https://github.com/ozisciegealp-sys/regional-kpi-dashboard) |
-| İç denetim standardizasyonu ve bulgulardan eğitim programı | [internal-audit-tracker](https://github.com/ozisciegealp-sys/internal-audit-tracker) |
-| Yıllık izin takip sistemi | [annual-leave-tracker](https://github.com/ozisciegealp-sys/annual-leave-tracker) |
+| # | Proje | Kapsam | Depo |
+|---|---|---|---|
+| 01 | Günlük mağaza raporlama ve mark-out otomasyonu | 16 mağaza · Excel + VBA + Oracle ERP | [store-markout-form](https://github.com/ozisciegealp-sys/store-markout-form) |
+| 02 | Kapasite planlama ve otomatik par level modeli | 16 mağaza → 6 bölge · Excel | [store-par-level-model](https://github.com/ozisciegealp-sys/store-par-level-model) |
+| 03 | Bölge KPI kontrol platformu ve Yıldızlar Ligi | 16 mağaza · P&L ve 16 KPI | [regional-kpi-dashboard](https://github.com/ozisciegealp-sys/regional-kpi-dashboard) |
+| 04 | İç denetim standardizasyonu ve bulgulardan eğitim programı | 16 mağaza · Denetim ve DÖF | [internal-audit-tracker](https://github.com/ozisciegealp-sys/internal-audit-tracker) |
+| 05 | Yıllık izin takip sistemi | 6 bölge · İş Kanunu Md. 53 | [annual-leave-tracker](https://github.com/ozisciegealp-sys/annual-leave-tracker) |
 
-Bağlı depolardaki dosyalar, şirket verisi içeren orijinallerin sahte veriyle yeniden kurulmuş sürümleridir. Ayrıntı her deponun kendi README dosyasında.
+## Teknik yapı
 
-## Bu depo
+Site tek bir bağımsız `index.html` dosyasından oluşur (satır içi CSS ve yalın JavaScript, açık/koyu tema, TR/EN dil geçişi, sayfa içi tablo büyütme); harici olarak yalnızca Google Fonts kullanılır ve GitHub Pages üzerinden yayınlanır.
 
-Sitenin tamamı tek bir `index.html` dosyasıdır: HTML ve CSS aynı dosyada, harici bağımlılık olarak yalnızca Google Fonts kullanılıyor. GitHub Pages ile yayınlanıyor.
+## İletişim ve Lisans
 
-## İletişim
-
-ozisciegealp@gmail.com · [LinkedIn](https://www.linkedin.com/in/ege-alp-ozisci/)
+ozisciegealp@gmail.com · [LinkedIn](https://www.linkedin.com/in/ege-alp-ozisci/) · MIT Lisansı (`LICENSE`)

@@ -2,26 +2,26 @@
 
 [Türkçe](README.md) | **English**
 
-Portfolio record of my retail operations projects: **https://ozisciegealp-sys.github.io/eao/**
+Portfolio record of my retail operations and automation systems: **https://ozisciegealp-sys.github.io/eao/**
 
-A record of the reporting, planning, audit, and tracking systems I built across multi-store retail and F&B operations. Each entry lists the period, scope, and work delivered, with links to working versions rebuilt with synthetic data.
+A structured record of the reporting, capacity planning, KPI scorecard, internal audit, and workforce leave-tracking systems I built across a 16-store area—and rolled out across up to 6 areas—alongside multi-store retail and F&B store management.
+
+> **Confidentiality & Synthetic Data Note:** All brand names, company financials, and personal records have been removed for confidentiality. Every workbook and VBA module in the linked repositories runs entirely on synthetic data.
 
 ## Projects
 
-| Project | Repository |
-|---|---|
-| Daily store reporting automation (store-level form) | [store-markout-form](https://github.com/ozisciegealp-sys/store-markout-form) |
-| Capacity planning and automated par level model | [store-par-level-model](https://github.com/ozisciegealp-sys/store-par-level-model) |
-| Area KPI control platform | [regional-kpi-dashboard](https://github.com/ozisciegealp-sys/regional-kpi-dashboard) |
-| Internal audit standardisation and audit-driven training programme | [internal-audit-tracker](https://github.com/ozisciegealp-sys/internal-audit-tracker) |
-| Annual leave tracking system | [annual-leave-tracker](https://github.com/ozisciegealp-sys/annual-leave-tracker) |
+| # | System | Scope | Repository |
+|---|---|---|---|
+| 01 | Daily store reporting and mark-out automation | 16 stores · Excel + VBA + Oracle ERP | [store-markout-form](https://github.com/ozisciegealp-sys/store-markout-form) |
+| 02 | Capacity planning and automated par level model | 16 stores → 6 areas · Excel | [store-par-level-model](https://github.com/ozisciegealp-sys/store-par-level-model) |
+| 03 | Area KPI control platform & cumulative store league | 16 stores · P&L & 16 KPIs | [regional-kpi-dashboard](https://github.com/ozisciegealp-sys/regional-kpi-dashboard) |
+| 04 | Internal audit standardisation and audit-driven training | 16 stores · Audit & CAPA | [internal-audit-tracker](https://github.com/ozisciegealp-sys/internal-audit-tracker) |
+| 05 | Annual leave tracking system | 6 areas · Labour Law Art. 53 | [annual-leave-tracker](https://github.com/ozisciegealp-sys/annual-leave-tracker) |
 
-The files in the linked repositories are working versions rebuilt with synthetic data from originals that contained proprietary company data. Details are documented in each repository's README (in both Turkish and English).
+## Technical notes
 
-## About this repository
+The site is a single self-contained `index.html` file (inline CSS and vanilla JavaScript, dark/light theme, TR/EN language switch, in-page screenshot lightbox) with Google Fonts as its sole external asset, deployed via GitHub Pages.
 
-The entire site is a single `index.html` file with inline CSS and JavaScript, using only Google Fonts as an external dependency, published via GitHub Pages.
+## Contact & License
 
-## Contact
-
-ozisciegealp@gmail.com · [LinkedIn](https://www.linkedin.com/in/ege-alp-ozisci/)
+ozisciegealp@gmail.com · [LinkedIn](https://www.linkedin.com/in/ege-alp-ozisci/) · MIT License (`LICENSE`)

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ege Alp Özişci — Operasyon ve otomasyon kayıtları</title>
-<meta name="description" content="Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.">
+<meta name="description" content="Çok şubeli perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin sentetik veriyle çalışan kayıtları.">
 <meta name="author" content="Ege Alp Özişci">
 <meta name="theme-color" content="#F2F2ED" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D1210" media="(prefers-color-scheme: dark)">
@@ -16,8 +16,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Ege Alp Özişci — retail operations: daily store reporting, area KPI platform, internal audit and leave tracking; working samples rebuilt with synthetic data">
-<meta property="og:locale" content="en_GB">
-<meta property="og:locale:alternate" content="tr_TR">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://ozisciegealp-sys.github.io/eao/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231F5D4C'/%3E%3Ctext x='32' y='43' font-family='Helvetica,Arial,sans-serif' font-size='30' font-weight='700' fill='%23F2F2ED' text-anchor='middle'%3EE%C3%96%3C/text%3E%3C/svg%3E">
@@ -139,8 +139,16 @@
 
   .who{
     margin-top:1.6rem;padding-top:1.1rem;border-top:1px solid var(--hair);
-    color:var(--ink-soft);font-size:.9375rem;max-width:32rem;
+    color:var(--ink-soft);font-size:.9375rem;max-width:36rem;
   }
+  .privacy-pill{
+    display:inline-flex;align-items:center;gap:.45rem;
+    margin-top:.85rem;padding:.28rem .65rem;
+    font-family:var(--mono);font-size:.6875rem;letter-spacing:.03em;
+    color:var(--ink-soft);background:var(--raised);
+    border:1px solid var(--rule);border-radius:3px;
+  }
+  .privacy-pill::before{content:"●";color:var(--accent);font-size:.6rem}
 
   .hero{padding:4rem 0 3.25rem}
   h1{
@@ -198,7 +206,7 @@
 
   section{padding-top:4rem;scroll-margin-top:1.5rem}
   h2{font-size:1.125rem;font-weight:700;letter-spacing:-.008em;padding-bottom:.6rem;border-bottom:2px solid var(--ink)}
-  .lede{margin-top:1.1rem;color:var(--ink-soft);max-width:34rem;font-size:.9375rem}
+  .lede{margin-top:1.1rem;color:var(--ink-soft);max-width:36rem;font-size:.9375rem}
 
   .rec{
     position:relative;
@@ -222,7 +230,7 @@
   .rec p{margin-top:.7rem;max-width:34rem;font-size:.9375rem}
 
   .ba{
-    margin-top:1rem;display:grid;gap:.3rem;max-width:34rem;
+    margin-top:1rem;display:grid;gap:.3rem;max-width:36rem;
     padding:.7rem .85rem;background:var(--raised);
     border:1px solid var(--hair);border-radius:4px;
   }
@@ -231,11 +239,10 @@
   .ba-v{font-size:.875rem;color:var(--ink-soft)}
   .ba div+div .ba-v{color:var(--accent);font-weight:500}
 
-
   /* özet, görsel, akış, ayrıntı */
   .rec p.sum{font-size:1rem;color:var(--ink);max-width:36rem}
   .shot{margin-top:1.1rem;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:#fff}
-  .shot a{display:block;line-height:0}
+  .shot a{display:block;line-height:0;cursor:zoom-in}
   .shot img{display:block;width:100%;height:auto}
   .shot figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;padding:.55rem .75rem;background:var(--raised);border-top:1px solid var(--hair);font-size:.8125rem;line-height:1.45;color:var(--ink-soft)}
   .shot-note{font-family:var(--mono);font-size:.6875rem;color:var(--ink-faint);white-space:nowrap}
@@ -298,6 +305,25 @@
   }
   .foot-line{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
+  /* sayfa içi görsel büyütme (lightbox) */
+  .lb{
+    position:fixed;inset:0;z-index:100;
+    display:none;align-items:center;justify-content:center;flex-direction:column;gap:.75rem;
+    padding:1.5rem;background:rgba(10,14,12,.88);backdrop-filter:blur(4px);
+    cursor:zoom-out;
+  }
+  .lb.open{display:flex}
+  .lb-inner{max-width:min(96vw,1500px);max-height:84vh;overflow:auto;border-radius:4px;background:#fff;box-shadow:0 18px 48px rgba(0,0,0,.45);cursor:default}
+  .lb-inner img{display:block;width:100%;height:auto}
+  .lb-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:min(96vw,1500px);color:#E9EDE7;font-size:.8125rem}
+  .lb-close{
+    font:inherit;font-family:var(--mono);font-size:.75rem;
+    color:#E9EDE7;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.24);border-radius:3px;
+    padding:.28rem .65rem;cursor:pointer;white-space:nowrap;
+  }
+  .lb-close:hover{border-color:#6FD0AC;color:#6FD0AC}
+
   @media (prefers-reduced-motion:no-preference){
     .rv{opacity:0;transform:translateY(10px)}
     .rv.is-in{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.2,.7,.3,1),transform .5s cubic-bezier(.2,.7,.3,1)}
@@ -325,7 +351,9 @@
 
   @media print{
     body{padding:0;font-size:11pt;color:#000;background:#fff}
-    body::before,.progress,.tools,.skip{display:none!important}
+    body::before,.progress,.tools,.skip,.lb{display:none!important}
+    .rv{opacity:1!important;transform:none!important}
+    .bar-fill{width:var(--w)!important}
     .row{grid-template-columns:1fr}
     .rail{position:static;color:#555}
     .rec{break-inside:avoid}
@@ -358,7 +386,8 @@
           <button id="lang" type="button" class="btn">English</button>
         </div>
       </div>
-      <p class="who" data-en="Retail operations manager. This page is the record of the reporting, planning, audit and tracking systems I built across a 16-store area — each one with a working version, rebuilt with synthetic data, on GitHub.">Perakende operasyon yöneticisi. Bu sayfa, 16 mağazalık bölgede kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı — her birinin sahte veriyle çalışan sürümü GitHub'da.</p>
+      <p class="who" data-en="Retail operations and store manager (9 years in the field, 5 years in multi-unit management and P&amp;L ownership). Alongside running stores, I built the reporting, planning, audit and tracking systems below across a 16-store area and rolled them out across up to 6 areas.">Perakende operasyon yöneticisi ve mağaza müdürü (9 yıl saha, 5 yıl çok şubeli yönetim ve P&amp;L sorumluluğu). Mağaza yöneticiliğime paralel olarak 16 mağazalık bölgede kurup 6 bölgeye yaygınlaştırdığım raporlama, planlama, denetim ve takip sistemlerinin kaydı.</p>
+      <div class="privacy-pill" data-en="Confidentiality note: all brand names and company data removed · rebuilt with synthetic data">Gizlilik notu: marka ve şirket verileri çıkarılmıştır · tamamı sentetik veriyle çalışır</div>
     </div>
   </header>
 
@@ -368,7 +397,7 @@
     <div class="rail"><span class="tick">●</span><span data-en="Record">Kayıt</span><span>2026</span></div>
     <div>
       <h1 data-en="I cut daily store reporting from an hour to <b>one minute</b> per store.">Mağaza başına günlük raporlamayı bir saatten <b>bir dakikaya</b> indirdim.</h1>
-      <p class="sub" data-en="With a VBA system running on Excel and Oracle, used in the 16 stores of the area. About 250 hours of manual work removed per store per year.">Bölgedeki 16 mağazada kullanılan, Excel ve Oracle üzerinde VBA ile çalışan bir sistemle. Mağaza başına yılda yaklaşık 250 saatlik elle iş.</p>
+      <p class="sub" data-en="With a VBA system running on Excel and Oracle ERP across the 16 stores in the area. About 250 hours of manual work removed per store per year.">Bölgedeki 16 mağazada kullanılan, Excel ve Oracle ERP üzerinde VBA ile çalışan bir sistemle. Mağaza başına yılda yaklaşık 250 saatlik elle iş ortadan kalktı.</p>
 
       <div class="delta">
         <div class="delta-label" data-en="Daily store report — preparation time per store (approx.)">Günlük mağaza raporu — mağaza başına hazırlık süresi (yaklaşık)</div>
@@ -408,37 +437,37 @@
     <div class="rail"><span class="tick">●</span><span data-en="Projects">Projeler</span><span>05</span></div>
     <div>
       <h2 data-en="The systems">Kurduğum sistemler</h2>
-      <p class="lede" data-en="Each entry gives the period, the scope and the work, and links to a working version rebuilt with synthetic data. Only the work I can show a file for is listed here.">Her kayıtta dönem, kapsam ve yapılan iş var; her birinin sahte veriyle yeniden kurulmuş çalışan sürümü bağlantılı. Bu sayfada yalnızca dosyasını gösterebildiğim işler yer alıyor.</p>
+      <p class="lede" data-en="Each entry documents the period, operational scope and problem solved, linking to a working workbook rebuilt entirely with synthetic data. No proprietary company or employee records are included.">Her kayıtta dönem, operasyonel kapsam ve çözülen problem yer alır; her birinin sentetik veriyle yeniden kurulmuş çalışan sürümü bağlantılıdır. Hiçbir kurum içi veya kişisel veri yer almaz.</p>
 
       <article class="rec rv" data-idx="01">
         <div class="rec-head">
-          <h3 data-en="Daily store reporting automation">Günlük mağaza raporlama otomasyonu</h3>
+          <h3 data-en="Daily store reporting and mark-out automation">Günlük mağaza raporlama ve mark-out otomasyonu</h3>
           <span class="per">2022–2026</span>
         </div>
-        <p class="sum" data-en="Automated the stores' daily report with VBA; preparation time fell from about 1 hour to about 1 minute per store.">Mağazaların günlük raporunu VBA ile otomatikleştirdim; hazırlık süresi mağaza başına yaklaşık 1 saatten 1 dakikaya indi.</p>
-        <div class="flow" role="img" aria-label="Veri akışı: Oracle satış raporu, Excel ve VBA, günlük mağaza raporu" data-aria-en="Data flow: Oracle sales report, Excel and VBA, daily store report">
-          <span class="fl-node" data-en="Oracle sales report">Oracle satış raporu</span>
+        <p class="sum" data-en="Automated daily store reporting, SKU sales reconciliation and thaw/waste control with VBA; preparation time fell from ~1 hour to ~1 minute per store.">Mağazaların günlük satış-stok mutabakatını, çözündürme planını ve fire kontrolünü VBA ile otomatikleştirdim; hazırlık süresi mağaza başına ~1 saatten ~1 dakikaya indi.</p>
+        <div class="flow" role="img" aria-label="Veri akışı: Oracle ERP çıktısı, Excel ve VBA, günlük mağaza raporu ve devir" data-aria-en="Data flow: Oracle ERP export, Excel and VBA, daily store report and rollover">
+          <span class="fl-node" data-en="Oracle ERP export">Oracle ERP çıktısı</span>
           <span class="fl-arr" aria-hidden="true">→</span>
           <span class="fl-node fl-mid">Excel + VBA</span>
           <span class="fl-arr" aria-hidden="true">→</span>
-          <span class="fl-node" data-en="Daily store report">Günlük mağaza raporu</span>
+          <span class="fl-node" data-en="Daily report &amp; rollover">Günlük rapor ve devir</span>
         </div>
         <figure class="shot">
-          <a href="img/01-markout.webp" target="_blank" rel="noopener"><img src="img/01-markout.webp" width="1500" height="345" loading="lazy" decoding="async" alt="Gün sonu mark-out formunun ekran görüntüsü: donuk ve günlük bölümler, beklenen ve sayılan kapanış, fark sütunları" data-alt-en="Screenshot of the end-of-day mark-out form: frozen and daily sections, expected and counted closing stock, variance columns"></a>
-          <figcaption><span data-en="End-of-day mark-out form: sales come in from the report by SKU; expected closing stock and variance are calculated automatically.">Gün sonu (mark-out) formu: satış rapordan SKU ile gelir, beklenen kapanış ve fark kendiliğinden hesaplanır.</span><span class="shot-note" data-en="From the file rebuilt with synthetic data · click to enlarge">Sahte veriyle yeniden kurulmuş dosyadan · büyütmek için tıklayın</span></figcaption>
+          <a href="img/01-markout.webp"><img src="img/01-markout.webp" width="1500" height="362" decoding="async" alt="Gün sonu mark-out formunun ekran görüntüsü: donuk ve günlük bölümler, beklenen ve sayılan kapanış, fark sütunları" data-alt-en="Screenshot of the end-of-day mark-out form: frozen and daily sections, expected and counted closing stock, variance columns"></a>
+          <figcaption><span data-en="End-of-day mark-out sheet: SKU sales import in one shortcut; expected closing stock and shrinkage calculate automatically.">Gün sonu (mark-out) formu: satışlar ERP raporundan tek tuşla SKU bazında gelir, beklenen kapanış ve kayıp/fark otomatik hesaplanır.</span><span class="shot-note" data-en="Synthetic data · click to enlarge">Sentetik veri · büyütmek için tıklayın</span></figcaption>
         </figure>
         <div class="ba">
-          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="about 1 hour of manual preparation, every day">her gün yaklaşık 1 saat elle hazırlık</span></div>
-          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="about 1 minute — roughly 250 hours a year per store">yaklaşık 1 dakika — mağaza başına yılda yaklaşık 250 saat</span></div>
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="about 1 hour of manual lookup, typing and carryover every day">her gün yaklaşık 1 saat elle rapor okuma, yazma ve devir</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="about 1 minute — roughly 250 hours saved per store per year">yaklaşık 1 dakika — mağaza başına yılda ~250 saat tasarruf</span></div>
         </div>
         <details class="more">
           <summary><span data-en="Full description">Tam açıklama</span></summary>
-          <p data-en="Automated the stores' daily report with a VBA architecture running on Excel and Oracle. I built it as an assistant manager and later brought further daily operational tasks into its scope.">Mağazaların günlük raporunu VBA mimarisiyle otomatikleştirdim; sistem Excel ve Oracle üzerinde çalışıyor. Müdür yardımcısıyken kurdum, sonra ek günlük operasyonel görevleri de kapsama aldım.</p>
+          <p data-en="Automated the stores' daily reporting workflow on Excel and Oracle ERP with VBA. Built it as an assistant store manager and expanded its scope over time. The linked repository shares the store-level workbook: one-shortcut ERP SKU sales import, automated next-day rollover and archiving, transaction/UPH-based thaw planning, expiry (SKT) tracking, and 30-day star vs. high-waste item classification.">Mağazaların günlük raporlama akışını Excel ve Oracle ERP üzerinde çalışan VBA mimarisiyle otomatikleştirdim; mağaza müdür yardımcısıyken kurduğum yapıya zamanla ek günlük kontrolleri dahil ettim. Bağlantılı depoda sistemin mağaza ayağı yer alır: ERP satış çıktısını tek kısayolla okuyan gün sonu formu, otomatik gün kapatma/arşivleme, adisyon (ADT/UPH) bazlı çözündürme planı, SKT tablosu ve 30 günlük yıldız/sorunlu ürün fire analizi.</p>
         </details>
         <ul class="chips">
-          <li data-en="16 stores">16 mağaza</li><li>Starbucks</li><li>Excel</li><li>VBA</li><li>Oracle</li>
+          <li data-en="16 stores">16 mağaza</li><li data-en="F&amp;B retail">F&amp;B perakende</li><li>Excel</li><li>VBA</li><li>Oracle ERP</li>
         </ul>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/store-markout-form"><span data-en="The end-of-day form used in the stores, rebuilt with synthetic data">Mağazalarda kullanılan gün sonu formu, sahte veriyle yeniden kuruldu</span><span class="arr" aria-hidden="true">↗</span></a>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-markout-form" target="_blank" rel="noopener"><span data-en="Working version with synthetic data and VBA module">Sentetik veriyle çalışan sürüm ve VBA modülü</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
 
       <article class="rec rv" data-idx="02">
@@ -446,23 +475,23 @@
           <h3 data-en="Capacity planning and automated par level model">Kapasite planlama ve otomatik par level modeli</h3>
           <span class="per">2022–2026</span>
         </div>
-        <p class="sum" data-en="A model that calculates order quantities per item from the last month of sales; rolled out from 16 stores to 6 areas.">Son bir aylık satış verisinden ürün bazında sipariş miktarını hesaplayan model; 16 mağazadan 6 bölgeye yaygınlaştı.</p>
+        <p class="sum" data-en="Converts last-month product sales (with a weekly peak mode) into per-item case orders and checks shelf/freezer fit; rolled out from 16 stores to 6 areas.">Son bir aylık satış hızından (özel dönemlerde haftalık modla) ürün bazında koli siparişini ve depo doluluğunu hesaplayan model; 16 mağazadan 6 bölgeye yaygınlaştı.</p>
         <figure class="shot">
-          <a href="img/02-par-level.webp" target="_blank" rel="noopener"><img src="img/02-par-level.webp" width="1500" height="449" loading="lazy" decoding="async" alt="Par level sayfasının ekran görüntüsü: stok kalemi bazında günlük tüketim, par seviyesi, sayım ve sipariş" data-alt-en="Screenshot of the par level sheet: daily usage, par level, count and order per stock item"></a>
-          <figcaption><span data-en="Par level sheet: daily usage × period × safety stock − count = order in cases.">Par level sayfası: günlük tüketim × periyot × güvenlik stoğu − sayım = koli bazında sipariş.</span><span class="shot-note" data-en="From the file rebuilt with synthetic data · click to enlarge">Sahte veriyle yeniden kurulmuş dosyadan · büyütmek için tıklayın</span></figcaption>
+          <a href="img/02-par-level.webp"><img src="img/02-par-level.webp" width="1500" height="449" loading="lazy" decoding="async" alt="Par level sayfasının ekran görüntüsü: stok kalemi bazında günlük tüketim, par seviyesi, sayım ve sipariş" data-alt-en="Screenshot of the par level sheet: daily usage, par level, count and order per stock item"></a>
+          <figcaption><span data-en="Par level sheet: daily usage × period × safety stock − count = order in cases.">Par level sayfası: günlük tüketim × periyot × güvenlik stoğu − sayım = koli bazında sipariş.</span><span class="shot-note" data-en="Synthetic data · click to enlarge">Sentetik veri · büyütmek için tıklayın</span></figcaption>
         </figure>
         <div class="ba">
-          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="every store calculated its order item by item, by hand">her mağazanın siparişi kalem kalem elle hesaplanıyordu</span></div>
-          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="order quantities calculated from sales data, across 6 areas">satış verisinden hesaplanan sipariş miktarı, 6 bölgede</span></div>
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="every store calculated orders item by item by hand, without volume checks">her mağazanın siparişi hacim kontrolü olmadan kalem kalem elle hesaplanıyordu</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="recipe-driven case orders and storage capacity sizing across 6 areas">reçete matrisiyle otomatik koli siparişi ve raf/dolap kapasite kontrolü, 6 bölgede</span></div>
         </div>
         <details class="more">
           <summary><span data-en="Full description">Tam açıklama</span></summary>
-          <p data-en="A model that converts forecast business volume into required store capacity and storage space, feeding into new store planning. On top of it I built a par level structure that calculates order quantities per item from the last month of store sales. Used in 16 stores, then rolled out to 6 areas through the area manager.">Öngörülen iş hacmini gerekli mağaza kapasitesine ve depolama ihtiyacına dönüştüren bir hesaplama modeli; yeni mağaza planlamasına girdi sağladı. Aynı modelin üzerine, mağazaların son bir aylık satış verisinden ürün bazında sipariş miktarını otomatik hesaplayan par level yapısını kurdum. 16 mağazada uygulandıktan sonra bölge müdürü aracılığıyla 6 bölgeye yaygınlaştırıldı.</p>
+          <p data-en="Converts product sales velocity into stock-item daily consumption via a recipe matrix, adjusts for delivery schedule and morning/afternoon delivery shift, and checks case volume against dry-storage shelves and freezer doors—providing minimum unit sizing for new store planning as well. Deployed across 16 stores and subsequently rolled out to 6 areas.">Ürün satış hızını reçete matrisiyle sarf ve stok kalemi tüketimine çeviren, sevkiyat takvimine ve sabah/akşam teslimat vardiyasına göre sipariş periyodunu düzelten analitik model. Hesaplanan par stoğunun kuru depo raf ve donuk dolap hacmine sığıp sığmadığını denetler; 5 farklı mağaza formatı için minimum ünite ihtiyacını çıkararak yeni mağaza planlamasına da girdi sağlar. 16 mağazalık bölgeden 6 bölgeye yaygınlaştırıldı.</p>
         </details>
         <ul class="chips">
-          <li data-en="16 stores → 6 areas">16 mağaza → 6 bölge</li><li>Starbucks</li><li>Excel</li>
+          <li data-en="16 stores → 6 areas">16 mağaza → 6 bölge</li><li data-en="Supply &amp; inventory">Tedarik ve stok</li><li>Excel</li>
         </ul>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model"><span data-en="Working version with synthetic data and documentation">Sahte veriyle çalışan sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/store-par-level-model" target="_blank" rel="noopener"><span data-en="Working version with synthetic data and documentation">Sentetik veriyle çalışan sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
 
       <article class="rec rv" data-idx="03">
@@ -470,19 +499,23 @@
           <h3 data-en="Area KPI control platform">Bölge KPI kontrol platformu</h3>
           <span class="per">2025–2026</span>
         </div>
-        <p class="sum" data-en="A platform that tracks profitability, sales, complaints and CRM for 16 stores in one table; deviations were turned into store-level actions every month.">16 mağazanın kârlılık, satış, şikâyet ve CRM göstergelerini tek tabloda izleyen platform; sapmalar her ay mağaza bazında aksiyona bağlandı.</p>
+        <p class="sum" data-en="Consolidates profitability, sales, complaints, CRM and audit metrics for 16 stores into one scored table and multi-period league; monthly deviations drove store actions.">16 mağazanın kârlılık, satış, şikâyet, CRM ve denetim göstergelerini tek puanlı tabloda ve dönem liginde birleştiren platform; sapmalar her ay mağaza aksiyonuna bağlandı.</p>
         <figure class="shot">
-          <a href="img/03-kpi.webp" target="_blank" rel="noopener"><img src="img/03-kpi.webp" width="1500" height="333" loading="lazy" decoding="async" alt="Bölge KPI genel tablosunun ekran görüntüsü: mağaza satırları, hedefe göre renklendirilmiş göstergeler, performans puanı" data-alt-en="Screenshot of the area KPI overview: store rows, indicators coloured against target, performance score"></a>
-          <figcaption><span data-en="Overview table: one row per store, every indicator green or red against its target.">Genel tablo: her mağaza tek satırda, her gösterge hedefine göre yeşil ya da kırmızı.</span><span class="shot-note" data-en="From the file rebuilt with synthetic data · click to enlarge">Sahte veriyle yeniden kurulmuş dosyadan · büyütmek için tıklayın</span></figcaption>
+          <a href="img/03-kpi.webp"><img src="img/03-kpi.webp" width="1500" height="321" loading="lazy" decoding="async" alt="Bölge KPI genel tablosunun ekran görüntüsü: mağaza satırları, hedefe göre renklendirilmiş göstergeler, performans puanı" data-alt-en="Screenshot of the area KPI overview: store rows, indicators coloured against target, performance score"></a>
+          <figcaption><span data-en="Overview table: one row per store across 16 scored KPIs and 5 context metrics, coloured against target.">Genel tablo: her mağaza tek satırda; puanlanan 16 KPI hedefe göre yeşil veya kırmızı.</span><span class="shot-note" data-en="Synthetic data · click to enlarge">Sentetik veri · büyütmek için tıklayın</span></figcaption>
         </figure>
+        <div class="ba">
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="sales, P&amp;L, CRM, waste and audit figures lived in separate scattered files">satış, P&amp;L, CRM, fire ve denetim verileri ayrı raporlarda dağınık izleniyordu</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="11 reports unified into a 100-point scorecard and cumulative store league">11 ayrı rapor 100 puanlık karneye ve kümülatif bölge ligine bağlandı</span></div>
+        </div>
         <details class="more">
           <summary><span data-en="Full description">Tam açıklama</span></summary>
-          <p data-en="An online Excel platform where profitability, sales, customer complaints, CRM usage and store-level internal calculations are tracked in one structure. I ran the monthly reviews and made sure deviations turned into store-level actions.">Kârlılık, satış, müşteri şikâyetleri, CRM kullanım oranı ve mağaza bazlı iç hesaplamaların tek yapı üzerinden izlendiği online Excel platformu. Aylık kontrollerini yürüttüm ve sapmaların mağaza bazında aksiyona bağlanmasını sağladım.</p>
+          <p data-en="An online Excel platform merging 11 separate operational reports (sales, Line 12 store P&amp;L, CRM, delivery platforms, product mix, waste, inventory variance, training, turnover, guest complaints and audits) into a single scorecard. Scores each store out of 100, tracks cumulative multi-period standings and revenue tiers on a 'Stars League' sheet, and pairs each row with P&amp;L variance notes for monthly reviews.">Satış, P&amp;L (mağaza katkısı), CRM, paket servis platformları, ürün karması, fire, envanter farkı, eğitim, turnover, müşteri şikâyetleri ve denetim sonuçlarından oluşan 11 ayrı raporu tek yapıda birleştiren online Excel platformu. Her mağazayı 16 KPI üzerinden 100 puanlık ölçekte değerlendirir, Yıldızlar Ligi sayfasında çok dönemli kümülatif performansı ve ciro kademesini izler; aylık toplantılarda sapmaların aksiyona bağlanmasını sağlar.</p>
         </details>
         <ul class="chips">
-          <li data-en="16 stores">16 mağaza</li><li>Starbucks</li><li>Excel</li><li>CRM</li>
+          <li data-en="16 stores">16 mağaza</li><li data-en="P&amp;L &amp; KPI">P&amp;L ve KPI</li><li>Excel</li><li>CRM</li>
         </ul>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/regional-kpi-dashboard"><span data-en="Version rebuilt with synthetic data and documentation">Sahte veriyle yeniden kurulmuş sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/regional-kpi-dashboard" target="_blank" rel="noopener"><span data-en="Working version with synthetic data and documentation">Sentetik veriyle çalışan sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
 
       <article class="rec rv" data-idx="04">
@@ -490,19 +523,23 @@
           <h3 data-en="Internal audit standardisation and audit-driven training programme">İç denetim standardizasyonu ve denetim verisinden eğitim programı</h3>
           <span class="per">2025–2026</span>
         </div>
-        <p class="sum" data-en="Brought cross-store internal audits and corrective action tracking into one structure; the most frequent findings became an area-wide training programme.">Mağazalar arası iç denetimi ve DÖF takibini tek yapıya bağladım; en sık tekrar eden bulgular bölge eğitim programına dönüştü.</p>
+        <p class="sum" data-en="Unified cross-store internal audits and CAPA tracking; recurring weighted non-conformities were turned into an area-wide training programme.">Mağazalar arası çapraz iç denetimi ve DÖF takibini tek yapıya bağladım; en sık tekrar eden bulgular bölge eğitim programına dönüştü.</p>
         <figure class="shot">
-          <a href="img/04-denetim.webp" target="_blank" rel="noopener"><img src="img/04-denetim.webp" width="1500" height="812" loading="lazy" decoding="async" alt="Denetim dashboard&#x27;unun ekran görüntüsü: mağaza bazında iç ve esas denetim puanları, fark, bulgu ve DÖF sayıları, grafik" data-alt-en="Screenshot of the audit dashboard: internal and official audit scores per store, gap, findings and corrective actions, chart"></a>
-          <figcaption><span data-en="Audit dashboard: internal and official audit scores side by side, the gap between them and open corrective actions.">Denetim dashboard'u: iç ve esas denetim puanları yan yana, aradaki fark ve açık DÖF sayısı.</span><span class="shot-note" data-en="From the file rebuilt with synthetic data · click to enlarge">Sahte veriyle yeniden kurulmuş dosyadan · büyütmek için tıklayın</span></figcaption>
+          <a href="img/04-denetim.webp"><img src="img/04-denetim.webp" width="1500" height="812" loading="lazy" decoding="async" alt="Denetim dashboard&#x27;unun ekran görüntüsü: mağaza bazında iç ve esas denetim puanları, fark, bulgu ve DÖF sayıları, grafik" data-alt-en="Screenshot of the audit dashboard: internal and official audit scores per store, gap, findings and corrective actions, chart"></a>
+          <figcaption><span data-en="Audit dashboard: internal and official audit scores side by side, calibration gap and open CAPAs.">Denetim dashboard'u: iç ve esas denetim puanları yan yana, kalibrasyon farkı ve açık DÖF sayısı.</span><span class="shot-note" data-en="Synthetic data · click to enlarge">Sentetik veri · büyütmek için tıklayın</span></figcaption>
         </figure>
+        <div class="ba">
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="audit outcomes stayed in individual PDFs; recurring findings went unmeasured">denetim sonuçları tekil PDF raporlarında kalıyor, tekrar eden bulgular ölçülmüyordu</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="peer-audit rotation, internal-vs-official gap and CAPA tracking feeding area training">çapraz rotasyon, iç-esas puan farkı ve DÖF takibi bölge eğitimine girdi üretti</span></div>
+        </div>
         <details class="more">
           <summary><span data-en="Full description">Tam açıklama</span></summary>
-          <p data-en="Brought the pre-audit process and corrective and preventive action tracking into one shared structure across stores, and planned the rotation in which store managers audit and support each other. Collected food safety audit results in a single data set, ranked the most frequent non-conformities, turned the findings into training content and presented it to the area manager, leading to an area-wide training programme.">Ön denetim akışını ve düzeltici-önleyici faaliyet takibini mağazalar arasında tek ortak yapıya bağladım; mağaza müdürlerinin karşılıklı iç denetim ve destek rotasyonlarını planlayıp yönettim. Gıda güvenliği denetim sonuçlarını tek veri setinde toplayıp en sık tekrar eden uygunsuzlukları önceliklendirdim, bulguları eğitim içeriğine dönüştürüp bölge müdürüne sundum ve bölge çapında bir eğitim sisteminin kurulmasına öncülük ettim.</p>
+          <p data-en="Brought pre-audit checks and corrective/preventive action (CAPA) tracking into a shared structure across 16 stores, managing quarterly peer-audit rotations among store managers by audit specialty. Aggregated operations, loss-prevention and food-safety findings in one dataset, weighted recurring non-conformities by severity, and turned top priorities into an area-wide quality training programme.">Ön denetim akışını ve düzeltici-önleyici faaliyet (DÖF) takibini 16 mağaza arasında tek ortak yapıya bağladım; mağaza müdürlerinin uzmanlık alanlarına göre çeyreklik çapraz iç denetim rotasyonlarını planlayıp yönettim. Operasyon, kayıp önleme ve gıda güvenliği bulgularını tek veri setinde toplayıp önem derecesiyle ağırlıklandırdım ve en sık tekrar eden uygunsuzluklardan bölge çapında kalite eğitim programı geliştirdim.</p>
         </details>
         <ul class="chips">
-          <li data-en="16 stores">16 mağaza</li><li>Starbucks</li><li>Excel</li><li data-en="Food safety">Gıda güvenliği</li>
+          <li data-en="16 stores">16 mağaza</li><li data-en="Internal audit &amp; CAPA">İç denetim ve DÖF</li><li data-en="Food safety">Gıda güvenliği</li><li>Excel</li>
         </ul>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/internal-audit-tracker"><span data-en="Version rebuilt with synthetic data and documentation">Sahte veriyle yeniden kurulmuş sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/internal-audit-tracker" target="_blank" rel="noopener"><span data-en="Working version with synthetic data and documentation">Sentetik veriyle çalışan sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
 
       <article class="rec rv" data-idx="05">
@@ -510,19 +547,23 @@
           <h3 data-en="Annual leave tracking system">Yıllık izin takip sistemi</h3>
           <span class="per">2022–2026</span>
         </div>
-        <p class="sum" data-en="An Excel-based system that tracks upcoming annual leave entitlements for all staff across 6 areas.">6 bölgedeki tüm personelin yaklaşan yıllık izin haklarını izleyen Excel tabanlı takip sistemi.</p>
+        <p class="sum" data-en="Tracks accrued annual leave balances, statutory entitlements and 60-day upcoming anniversaries across 6 areas from periodic HR data.">6 bölgedeki tüm personelin biriken yıllık izinlerini, yasal hak edişlerini ve yaklaşan yıldönümlerini İK verisinden izleyen takip sistemi.</p>
         <figure class="shot">
-          <a href="img/05-izin.webp" target="_blank" rel="noopener"><img src="img/05-izin.webp" width="1500" height="790" loading="lazy" decoding="async" alt="Yıllık izin özetinin ekran görüntüsü: bölge bazında biriken izin, alarm durumu ve iki grafik" data-alt-en="Screenshot of the annual leave summary: accrued leave per area, alarm status and two charts"></a>
-          <figcaption><span data-en="Area summary: accrued leave, people over 14 and 20 days, alarm and change against the previous period.">Bölge özeti: biriken izin, 14 ve 20 gün üstü kişi sayısı, alarm ve önceki döneme göre değişim.</span><span class="shot-note" data-en="From the file rebuilt with synthetic data · click to enlarge">Sahte veriyle yeniden kurulmuş dosyadan · büyütmek için tıklayın</span></figcaption>
+          <a href="img/05-izin.webp"><img src="img/05-izin.webp" width="1500" height="790" loading="lazy" decoding="async" alt="Yıllık izin özetinin ekran görüntüsü: bölge bazında biriken izin, alarm durumu ve iki grafik" data-alt-en="Screenshot of the annual leave summary: accrued leave per area, alarm status and two charts"></a>
+          <figcaption><span data-en="Area summary: accrued leave, headcount over 14 and 20 days, alarm status and period-over-period delta.">Bölge özeti: biriken izin, 14 ve 20 gün üstü kişi sayısı, alarm durumu ve önceki döneme göre değişim.</span><span class="shot-note" data-en="Synthetic data · click to enlarge">Sentetik veri · büyütmek için tıklayın</span></figcaption>
         </figure>
+        <div class="ba">
+          <div><span class="ba-k" data-en="Before">Önce</span><span class="ba-v" data-en="accrued balances and upcoming entitlements across 6 areas were filtered manually">6 bölgedeki izin bakiyeleri ve hak ediş tarihleri ham listelerden elle süzülüyordu</span></div>
+          <div><span class="ba-k" data-en="After">Sonra</span><span class="ba-v" data-en="statutory rules, 14/20-day alarms and manager action lists generated automatically">İş Kanunu Md. 53 hesabı, 14/20 gün alarmları ve yönetici listeleri otomatik üretiliyor</span></div>
+        </div>
         <details class="more">
           <summary><span data-en="Full description">Tam açıklama</span></summary>
-          <p data-en="Built and ran an Excel-based system that tracks upcoming annual leave entitlements for all staff across the 6 areas in the operation.">Operasyona bağlı 6 bölgedeki tüm personelin yaklaşan yıllık izin haklarını izleyen Excel tabanlı takip sistemini kurdum ve işler hâle getirdim.</p>
+          <p data-en="Calculates statutory annual leave entitlements by tenure and age brackets (Turkish Labour Law No. 4857, Art. 53) from periodic HR exports, flags staff earning new leave within 60 days, and derives leave taken from the delta between two snapshots while isolating out-of-scope regions. Triggers area-level alarms for balances over 14 and 20 days and outputs prioritized planning lists with ready-to-send manager notification drafts.">İK'dan periyodik gelen personel verisinden 4857 sayılı İş Kanunu (Md. 53) kıdem ve yaş dilimlerine göre yıllık izin haklarını hesaplayan, önümüzdeki 60 gün içinde yeni hak ediş kazanacak çalışanları işaretleyen ve iki dönem verisi arasındaki farktan kullandırılan izni çıkaran sistem. Ülke geneli ham veriden takip edilen 6 bölgeyi otomatik ayıklar; 14 ve 20 gün üstü bakiyeler için alarm üretip bölge ve mağaza yöneticilerine iletilecek öncelikli planlama listesini ve bilgilendirme taslağını hazırlar.</p>
         </details>
         <ul class="chips">
-          <li data-en="6 areas">6 bölge</li><li>Starbucks</li><li>Excel</li>
+          <li data-en="6 areas">6 bölge</li><li data-en="Workforce planning">İş gücü planlama</li><li>Excel</li>
         </ul>
-        <a class="repo" href="https://github.com/ozisciegealp-sys/annual-leave-tracker"><span data-en="Version rebuilt with synthetic data and documentation">Sahte veriyle yeniden kurulmuş sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
+        <a class="repo" href="https://github.com/ozisciegealp-sys/annual-leave-tracker" target="_blank" rel="noopener"><span data-en="Working version with synthetic data and documentation">Sentetik veriyle çalışan sürüm ve açıklama</span><span class="arr" aria-hidden="true">↗</span></a>
       </article>
 
     </div>
@@ -531,14 +572,14 @@
     <div class="rail"><span class="tick">●</span><span data-en="Contact">İletişim</span></div>
     <div>
       <h2 data-en="Contact">İletişim</h2>
-      <p data-en="For roles and projects, you can reach me here. Based in İzmir.">İş fırsatları ve projeler hakkında bu adreslerden ulaşabilirsiniz. İzmir'deyim.</p>
+      <p data-en="For roles and projects, you can reach me here. Based in Izmir.">İş fırsatları ve projeler hakkında bu adreslerden ulaşabilirsiniz. İzmir'deyim.</p>
       <div class="lines">
         <span class="mail-wrap">
           <button type="button" class="mail" id="mail" data-user="ozisciegealp" data-host="gmail.com"><span class="mail-label" data-en="Email">E-posta</span></button>
           <span class="mail-note" id="mail-note" role="status"></span>
         </span>
-        <a href="https://www.linkedin.com/in/ege-alp-ozisci/">LinkedIn</a>
-        <a href="https://github.com/ozisciegealp-sys">GitHub</a>
+        <a href="https://www.linkedin.com/in/ege-alp-ozisci/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/ozisciegealp-sys" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </section>
@@ -548,11 +589,21 @@
   <footer class="row">
     <div class="rail" aria-hidden="true"></div>
     <div class="foot-line">
-      <span>İzmir</span>
+      <span data-en="Izmir">İzmir</span>
       <span data-en="Last updated November 2026">Son güncelleme Kasım 2026</span>
     </div>
   </footer>
 
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="lb-bar">
+    <span id="lb-cap"></span>
+    <button type="button" class="lb-close" id="lb-close" data-en="Close (Esc)">Kapat (Esc)</button>
+  </div>
+  <div class="lb-inner" id="lb-inner">
+    <img id="lb-img" src="" alt="">
+  </div>
 </div>
 
 <script>
@@ -621,8 +672,8 @@
   /* ---- dil ---- */
   var TITLES={tr:"Ege Alp Özişci — Operasyon ve otomasyon kayıtları",
               en:"Ege Alp Özişci — Operations and automation record"};
-  var DESCS={tr:"Perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin kaydı.",
-             en:"A record of the reporting, planning, audit and tracking systems I built in multi-store retail operations."};
+  var DESCS={tr:"Çok şubeli perakende operasyonunda kurduğum raporlama, planlama, denetim ve takip sistemlerinin sentetik veriyle çalışan kayıtları.",
+             en:"A record of the reporting, planning, audit and tracking systems I built in multi-store retail operations, rebuilt with synthetic data."};
   var langBtn=document.getElementById("lang");
   var nodes=document.querySelectorAll("[data-en]");
   for(var i=0;i<nodes.length;i++){nodes[i].setAttribute("data-tr",nodes[i].innerHTML);}
@@ -654,6 +705,40 @@
   if(!savedLang){savedLang=(navigator.language||"").slice(0,2)==="tr"?"tr":"en";}
   setLang(savedLang==="en"?"en":"tr");
   langBtn.addEventListener("click",function(){setLang(root.lang==="en"?"tr":"en");});
+
+  /* ---- sayfa içi görsel büyütme ---- */
+  var lb=document.getElementById("lb"),lbImg=document.getElementById("lb-img"),
+      lbCap=document.getElementById("lb-cap"),lbClose=document.getElementById("lb-close"),
+      lbInner=document.getElementById("lb-inner"),lastFocus=null;
+  function closeLb(){
+    if(!lb||!lb.classList.contains("open")){return;}
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden","true");
+    lbImg.removeAttribute("src");
+    if(lastFocus){lastFocus.focus();}
+  }
+  var shots=document.querySelectorAll(".shot a");
+  for(var s=0;s<shots.length;s++){
+    shots[s].addEventListener("click",function(ev){
+      if(ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.altKey){return;}
+      ev.preventDefault();
+      var im=this.querySelector("img");
+      var cap=this.parentNode.querySelector("figcaption span");
+      lastFocus=this;
+      lbImg.src=this.getAttribute("href");
+      lbImg.alt=im?im.alt:"";
+      lbCap.textContent=cap?cap.textContent:"";
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden","false");
+      lbClose.focus();
+    });
+  }
+  if(lb){
+    lb.addEventListener("click",function(ev){if(ev.target===lb){closeLb();}});
+    lbInner.addEventListener("click",function(ev){ev.stopPropagation();});
+    lbClose.addEventListener("click",closeLb);
+    document.addEventListener("keydown",function(ev){if(ev.key==="Escape"){closeLb();}});
+  }
 
   /* ---- okuma çubuğu ---- */
   var prog=document.getElementById("progress"),ticking=false;
@@ -693,7 +778,7 @@
         if(el.hasAttribute("data-count")){countUp(el);}
         io.unobserve(el);
       }
-    },{rootMargin:"0px 0px -8% 0px",threshold:0.15});
+    },{rootMargin:"0px 0px -4% 0px",threshold:0.04});
     for(var j=0;j<watch.length;j++){io.observe(watch[j]);}
   }else{
     for(var k=0;k<watch.length;k++){watch[k].classList.add("is-in");}
